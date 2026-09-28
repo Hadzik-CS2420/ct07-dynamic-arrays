@@ -1,6 +1,15 @@
 name: Autograding Tests
+
+# workflow_dispatch only -- deliberately NOT on push.
+#
+# GitHub rounds every Actions job up to a full minute, and these finish in
+# seconds. On push, a student debugging in a flurry burns a minute per attempt.
+# Students get their score instantly and for free from
+# `python3 tests/scorecard.py`; this workflow is the instructor's side, swept
+# across every student repo at grading time with
+# `python scripts/collect_autograde.py ct07-dynamic-arrays`.
 on:
-  - push
+  - workflow_dispatch
   - repository_dispatch
 permissions:
   checks: write
@@ -22,11 +31,11 @@ jobs:
         cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
         cmake --build build --config Release
 
-    - name: Build Check (2 points)
+    - name: Build Check (0 points)
       id: build
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Build Check (2 points)
+        test-name: Build Check (0 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -35,15 +44,15 @@ jobs:
             echo "Build failed" && exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 0
 
     # ==================== new_and_delete Tests (14 points) ====================
 
-    - name: Heap Array Created (3 points)
+    - name: Heap Array Created (2 points)
       id: heap-array
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Heap Array Created (3 points)
+        test-name: Heap Array Created (2 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -52,13 +61,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 2
 
-    - name: Array Memory Freed (3 points)
+    - name: Array Memory Freed (2 points)
       id: array-freed
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Array Memory Freed (3 points)
+        test-name: Array Memory Freed (2 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -67,13 +76,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 2
 
-    - name: Smart Value Created (2 points)
+    - name: Smart Value Created (1 point)
       id: smart-value
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Smart Value Created (2 points)
+        test-name: Smart Value Created (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -82,13 +91,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
-    - name: Smart Array Created (2 points)
+    - name: Smart Array Created (1 point)
       id: smart-array
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Smart Array Created (2 points)
+        test-name: Smart Array Created (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -97,13 +106,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
-    - name: Shared Ptr Value (3 points)
+    - name: Shared Ptr Value (2 points)
       id: shared-value
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Shared Ptr Value (3 points)
+        test-name: Shared Ptr Value (2 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -112,7 +121,7 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 2
 
     - name: Shared Ptr Reference Count (1 point)
       id: shared-refcount
@@ -131,11 +140,11 @@ jobs:
 
     # ==================== dynamic_arrays Tests (22 points) ====================
 
-    - name: Empty Array Created (2 points)
+    - name: Empty Array Created (1 point)
       id: empty-arr
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Empty Array Created (2 points)
+        test-name: Empty Array Created (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -144,13 +153,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
-    - name: Three Elements Added (3 points)
+    - name: Three Elements Added (2 points)
       id: three-added
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Three Elements Added (3 points)
+        test-name: Three Elements Added (2 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -159,13 +168,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 2
 
-    - name: Array Full (2 points)
+    - name: Array Full (1 point)
       id: arr-full
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Array Full (2 points)
+        test-name: Array Full (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -174,13 +183,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
-    - name: New Capacity Doubled (3 points)
+    - name: New Capacity Doubled (2 points)
       id: cap-doubled
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: New Capacity Doubled (3 points)
+        test-name: New Capacity Doubled (2 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -189,13 +198,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 2
 
-    - name: Elements Copied (3 points)
+    - name: Elements Copied (2 points)
       id: elems-copied
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Elements Copied (3 points)
+        test-name: Elements Copied (2 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -204,13 +213,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 2
 
-    - name: Resized Correctly (4 points)
+    - name: Resized Correctly (3 points)
       id: resized
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Resized Correctly (4 points)
+        test-name: Resized Correctly (3 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -219,13 +228,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 4
+        max-score: 3
 
-    - name: Added After Resize (3 points)
+    - name: Added After Resize (1 point)
       id: after-resize
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Added After Resize (3 points)
+        test-name: Added After Resize (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -234,13 +243,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 3
+        max-score: 1
 
-    - name: Dynamic Array Memory Freed (2 points)
+    - name: Dynamic Array Memory Freed (1 point)
       id: dyn-freed
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Dynamic Array Memory Freed (2 points)
+        test-name: Dynamic Array Memory Freed (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -249,15 +258,15 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
     # ==================== two_dimensional_arrays Tests (12 points) ====================
 
-    - name: Dynamic 2D Array Printed (4 points)
+    - name: Dynamic 2D Array Printed (3 points)
       id: dyn-2d-print
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Dynamic 2D Array Printed (4 points)
+        test-name: Dynamic 2D Array Printed (3 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -266,13 +275,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 4
+        max-score: 3
 
-    - name: Dynamic 2D Array Freed (2 points)
+    - name: Dynamic 2D Array Freed (1 point)
       id: dyn-2d-freed
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Dynamic 2D Array Freed (2 points)
+        test-name: Dynamic 2D Array Freed (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -281,13 +290,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
-    - name: Flat Array as 2D (4 points)
+    - name: Flat Array as 2D (3 points)
       id: flat-2d
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Flat Array as 2D (4 points)
+        test-name: Flat Array as 2D (3 points)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -296,13 +305,13 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 4
+        max-score: 3
 
-    - name: Flat Array Freed (2 points)
+    - name: Flat Array Freed (1 point)
       id: flat-freed
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: Flat Array Freed (2 points)
+        test-name: Flat Array Freed (1 point)
         setup-command: ''
         command: |
           if [ -f build/run_tests ]; then
@@ -311,7 +320,7 @@ jobs:
             exit 1
           fi
         timeout: 10
-        max-score: 2
+        max-score: 1
 
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1

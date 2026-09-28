@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CS 2420 &middot; Heap Stepper</title>
+<!--
+  Heap Stepper -- CT 07, Dynamic Arrays, new/delete & Smart Pointers
+
+  Open this file in a browser. Double-click it, or right-click in VS Code ->
+  "Reveal in File Explorer" and double-click there. Nothing to install, no
+  internet needed, no extension: it is one self-contained file.
+
+  WHY NOT IN VS CODE: VS Code has no built-in HTML preview that runs
+  JavaScript. The markdown preview strips scripts and Simple Browser needs a
+  URL. Every student already has a browser.
+
+  images/lifetime_step_by_step.png is demo 1 and 2 held still. Demo 3 is the
+  resize-copy pattern that dynamic_arrays.cpp asks students to write, and is
+  the reason this file exists: the moment where TWO arrays are alive at once
+  is impossible to draw convincingly in a single frame.
+
+  Addresses are made up and deliberately tidy. Real ones are long, ugly and
+  different every run.
+
+  Everything is deliberately plain: no libraries, no build step, no fetch().
+  It has to work from a file:// URL on a Chromebook.
+-->
+<style>
+  :root {
+    --ink: #1a1a2e; --muted: #555; --line: #cbd5e1; --panel: #f8fafc;
+    --blue: #1565c0; --green: #2e7d32; --red: #c62828; --orange: #e65100;
+    --purple: #6a1b9a;
+    --zoom: 2.2;
+  }
+  html { font-size: calc(16px * var(--zoom)); }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif; color: var(--ink);
+    background: #fff; margin: 0; padding: 0 1rem 4rem; line-height: 1.5;
+  }
+  .wrap { max-width: min(1700px, 97vw); margin: 0 auto; }
+  header {
+    background: linear-gradient(135deg,#00695c 0%,#00897b 50%,#00897b 100%);
+    color: #fff; border-radius: 12px; padding: 1.5rem 2rem; margin: 1.5rem 0;
+  }
+  header h1 { margin: 0; font-size: 1.5rem; }
+  header p { margin: .5rem 0 0; font-size: .95rem; }
+  nav { margin-bottom: 1.5rem; font-size: .9rem; }
+  nav a {
+    display: inline-block; margin: 0 .5rem .4rem 0; padding: .3rem .7rem;
+    background: #e0f2f1; color: #00695c; border-radius: 999px;
+    text-decoration: none; border: 1px solid #b2dfdb;
+  }
+  nav a:hover, nav a:focus { background: #b2dfdb; }
+  section {
+    border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+  section > h2 { margin: 0 0 .25rem; font-size: 1.15rem; }
+  .sub { margin: 0 0 1rem; color: var(--muted); font-size: .9rem; }
+  .cols { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .col { flex: 1 1 20rem; min-width: 18rem; }
+  pre.code {
+    background: #1e1e2e; color: #cdd6f4; border-radius: 8px; padding: .85rem 0;
+    font-family: Consolas, 'Courier New', monospace; font-size: .85rem;
+    line-height: 1.75; margin: 0; overflow-x: auto;
+  }
+  pre.code .ln {
+    display: block; padding: 0 1rem 0 1.75rem; white-space: pre;
+    border-left: .35rem solid transparent; position: relative;
+  }
+  pre.code .ln.on {
+    background: #51546b; border-left-color: #f9e2af; color: #fff;
+    box-shadow: inset 0 0 0 .08rem rgba(249, 226, 175, .55);
+  }
+  pre.code .ln.on::before {
+    content: "\25B6"; position: absolute; left: .5rem; color: #f9e2af;
+  }
+  .kw { color: #cba6f7; } .fn { color: #89dceb; } .st { color: #a6e3a1; }
+  .nu { color: #fab387; } .cm { color: #9399b2; font-style: italic; }
+  .ty { color: #f9e2af; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: .75rem 1rem; margin-top: .75rem;
+  }
+  .panel h3 {
+    margin: 0 0 .5rem; font-size: .75rem; letter-spacing: .06em;
+    text-transform: uppercase; color: #37474f;
+  }
+  .panel.stack { border-left: .25rem solid var(--blue); }
+  .panel.heap  { border-left: .25rem solid var(--orange); }
+  .vars { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .var {
+    background: #fff; border: 1px solid var(--line); border-radius: 6px;
+    padding: .3rem .6rem; font-family: Consolas, monospace; font-size: .85rem;
+  }
+  .var b { color: var(--blue); font-weight: 600; }
+  .var.changed { border-color: var(--green); background: #e8f5e9; }
+  .var.dead { border-color: var(--red); background: #ffebee; color: #b71c1c; }
+  .out {
+    font-family: Consolas, monospace; font-size: .85rem; white-space: pre;
+    min-height: 4.5rem; margin: 0; color: var(--ink);
+  }
+  .note { font-size: .88rem; color: var(--muted); min-height: 3.2rem; margin: .6rem 0 0; }
+  .note b { color: var(--ink); }
+  .controls { display: flex; gap: .5rem; align-items: center; margin-top: .9rem; flex-wrap: wrap; }
+  button {
+    font: inherit; font-size: .88rem; padding: .4rem .9rem; border-radius: 6px;
+    border: 1px solid #00695c; background: #00695c; color: #fff; cursor: pointer;
+  }
+  button.ghost { background: #fff; color: #00695c; }
+  button:disabled { opacity: .4; cursor: default; }
+  .count { font-size: .85rem; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
+  label.opt { font-size: .88rem; color: var(--muted); display: inline-flex; align-items: center; gap: .35rem; }
+  select { font: inherit; font-size: .88rem; padding: .25rem; }
+
+  .strip { display: flex; gap: .3rem; flex-wrap: wrap; font-family: Consolas, monospace; font-size: .9rem; align-items: flex-start; }
+  .strip .lbl { font-size: .72rem; color: var(--muted); align-self: center; margin-right: .2rem; }
+  .cell {
+    min-width: 3.1rem; text-align: center; padding: .25rem .35rem; border-radius: 5px;
+    border: 1px solid var(--line); background: #fff; color: #757575;
+  }
+  .cell .addr { display: block; font-size: .62rem; color: #9e9e9e; letter-spacing: -.02em; }
+  .cell.live  { color: var(--ink); border-color: #ffb74d; background: #fff3e0; }
+  .cell.now   { color: #fff; background: #00695c; border-color: #00695c; font-weight: bold; }
+  .cell.now .addr { color: #b2dfdb; }
+  .cell.free  { color: #9e9e9e; border-style: dashed; background: #fafafa; }
+  .cell.leak  { color: var(--red); border-color: var(--red); background: #ffebee; font-weight: bold; }
+  .cell.empty { color: #bdbdbd; border-style: dashed; }
+  .cell.copied{ color: var(--green); border-color: #a5d6a7; background: #e8f5e9; }
+  footer { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  .sizebar { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; margin-top: .9rem; font-size: .8rem; }
+  .sizebar button {
+    background: rgba(255,255,255,.16); color: #fff; border-color: rgba(255,255,255,.6);
+    font-size: .8rem; padding: .25rem .7rem;
+  }
+  .sizebar button:hover { background: rgba(255,255,255,.3); }
+  .sizebar .val { font-variant-numeric: tabular-nums; opacity: .85; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Heap Stepper</h1>
+  <p>CS 2420 &middot; Module 3 &middot; press <b>Next</b> and watch the heap.
+     <code>images/lifetime_step_by_step.png</code> is demos 1 and 2 held still.</p>
+  <div class="sizebar" id="sizebar">
+    <span>Text size</span>
+    <button data-zoom="out" title="Smaller">A&minus;</button>
+    <button data-zoom="in" title="Bigger">A+</button>
+    <button data-zoom="projector">Projector</button>
+    <button data-zoom="reset">Reset</button>
+    <span class="val" id="zoomval"></span>
+  </div>
+</header>
+
+<nav>
+  <a href="#d1">1. new, delete, and the dangling pointer</a>
+  <a href="#d2">2. unique_ptr does it for you</a>
+  <a href="#d3">3. The resize-copy pattern</a>
+  <a href="#d4">4. Where the leaks come from</a>
+</nav>
+
+<section id="d1">
+  <h2>1. <code>new</code>, <code>delete</code>, and the dangling pointer</h2>
+  <p class="sub">Four moments in the life of one heap <code>int</code>. Watch what the closing brace
+     does &mdash; and what it does not.</p>
+  <div class="cols">
+    <div class="col">
+      <pre class="code" data-code></pre>
+      <div class="panel stack"><h3>Stack</h3><div class="vars" data-vars></div></div>
+    </div>
+    <div class="col">
+      <div class="panel heap"><h3>Heap</h3><div class="strip" data-strip></div></div>
+      <div class="panel"><h3>Output</h3><p class="out" data-out></p></div>
+    </div>
+  </div>
+  <p class="note" data-note></p>
+  <div class="controls" data-controls></div>
+</section>
+
+<section id="d2">
+  <h2>2. <code>unique_ptr</code> does the same thing, automatically</h2>
+  <p class="sub">Identical code shape. Switch between them and count the lines you have to remember.</p>
+  <div class="controls" style="margin: 0 0 .9rem;">
+    <label class="opt">Own it with
+      <select data-opt="own">
+        <option value="smart">std::unique_ptr &mdash; automatic</option>
+        <option value="raw">a raw pointer &mdash; by hand</option>
+      </select>
+    </label>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <pre class="code" data-code></pre>
+      <div class="panel stack"><h3>Stack</h3><div class="vars" data-vars></div></div>
+    </div>
+    <div class="col">
+      <div class="panel heap"><h3>Heap</h3><div class="strip" data-strip></div></div>
+      <div class="panel"><h3>Output</h3><p class="out" data-out></p></div>
+    </div>
+  </div>
+  <p class="note" data-note></p>
+  <div class="controls" data-controls></div>
+</section>
+
+<section id="d3">
+  <h2>3. The resize-copy pattern &mdash; growing a full array</h2>
+  <p class="sub">This is the pattern <code>dynamic_arrays.cpp</code> asks you to write, and the one Lab 3
+     is built on. For a few steps <b>two arrays are alive at once</b>. That is the part a still picture
+     cannot show.</p>
+  <div class="cols">
+    <div class="col">
+      <pre class="code" data-code></pre>
+      <div class="panel stack"><h3>Stack</h3><div class="vars" data-vars></div></div>
+    </div>
+    <div class="col">
+      <div class="panel heap"><h3>Heap &mdash; old array</h3><div class="strip" data-strip></div></div>
+      <div class="panel heap"><h3>Heap &mdash; new array</h3><div class="strip" data-strip2></div></div>
+    </div>
+  </div>
+  <p class="note" data-note></p>
+  <div class="controls" data-controls></div>
+</section>
+
+<section id="d4">
+  <h2>4. Where the leaks come from</h2>
+  <p class="sub">Three ways to get the resize wrong. Each one is a real bug that compiles and runs
+     without complaint.</p>
+  <div class="controls" style="margin: 0 0 .9rem;">
+    <label class="opt">Mistake
+      <select data-opt="bug">
+        <option value="none">none &mdash; the correct order</option>
+        <option value="nodelete">forget delete[] arr</option>
+        <option value="early">delete[] arr before copying</option>
+        <option value="single">delete arr instead of delete[] arr</option>
+      </select>
+    </label>
+  </div>
+  <div class="cols">
+    <div class="col">
+      <pre class="code" data-code></pre>
+      <div class="panel stack"><h3>Stack</h3><div class="vars" data-vars></div></div>
+    </div>
+    <div class="col">
+      <div class="panel heap"><h3>Heap</h3><div class="strip" data-strip></div></div>
+      <div class="panel"><h3>Verdict</h3><p class="out" data-out></p></div>
+    </div>
+  </div>
+  <p class="note" data-note></p>
+  <div class="controls" data-controls></div>
+</section>
+
+<footer>
+  <p>Part of <b>Code-Together 07</b>. The still versions are in <code>images/</code>, and the Diagrams
+     table in <code>README.md</code> says what each one is for.</p>
+</footer>
+
+</div>
+
+<script>
+/* Text size -- see the CT 06 stepper for the reasoning. One custom property
+   drives every rem on the page, and the choice is remembered per machine. */
+(function () {
+  var root = document.documentElement, KEY = "cs2420-stepper-zoom", DEFAULT = 2.2;
+  var out = document.getElementById("zoomval");
+  function set(z) {
+    z = Math.max(1, Math.min(4.5, Math.round(z * 10) / 10));
+    root.style.setProperty("--zoom", z);
+    if (out) { out.textContent = Math.round(z / DEFAULT * 100) + "%"; }
+    try { localStorage.setItem(KEY, z); } catch (e) {}
+  }
+  function current() {
+    return parseFloat(getComputedStyle(root).getPropertyValue("--zoom")) || DEFAULT;
+  }
+  var saved = NaN;
+  try { saved = parseFloat(localStorage.getItem(KEY)); } catch (e) {}
+  set(isNaN(saved) ? DEFAULT : saved);
+  document.getElementById("sizebar").addEventListener("click", function (e) {
+    var act = e.target.getAttribute("data-zoom");
+    if (!act) { return; }
+    if (act === "in") { set(current() + 0.2); }
+    if (act === "out") { set(current() - 0.2); }
+    if (act === "projector") { set(3.2); }
+    if (act === "reset") { set(DEFAULT); }
+  });
+})();
+
+/* The harness. Frames are computed up front, so Prev is just an index going
+   down and can never desynchronise from the code.
+   A frame is: { code, line, vars, out, strip, strip2, note } */
+
+function esc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function Stepper(section, build) {
+  var i = 0, frames = [], timer = null;
+  var codeEl   = section.querySelector("[data-code]");
+  var varsEl   = section.querySelector("[data-vars]");
+  var outEl    = section.querySelector("[data-out]");
+  var stripEl  = section.querySelector("[data-strip]");
+  var stripEl2 = section.querySelector("[data-strip2]");
+  var noteEl   = section.querySelector("[data-note]");
+  var bar      = section.querySelector("[data-controls]");
+
+  bar.innerHTML =
+    '<button class="ghost" data-act="prev">&larr; Prev</button>' +
+    '<button data-act="next">Next &rarr;</button>' +
+    '<button class="ghost" data-act="play">Play</button>' +
+    '<button class="ghost" data-act="reset">Reset</button>' +
+    '<span class="count" data-count></span>';
+  var countEl = bar.querySelector("[data-count]");
+  var playBtn = bar.querySelector('[data-act="play"]');
+
+  function cells(list) {
+    return (list || []).map(function (c) {
+      if (c.label) { return '<span class="lbl">' + esc(c.label) + "</span>"; }
+      return '<span class="cell ' + (c.state || "") + '">' + esc(c.text) +
+             (c.addr ? '<span class="addr">' + esc(c.addr) + "</span>" : "") + "</span>";
+    }).join("");
+  }
+
+  function draw() {
+    var f = frames[i] || {};
+    codeEl.innerHTML = (f.code || []).map(function (line, n) {
+      // A blank spacer line must still occupy a row -- an empty span collapses
+      // to zero height and the grouping the code was written with disappears.
+      return '<span class="ln' + (n === f.line ? " on" : "") + '">' +
+             (line === "" ? "&nbsp;" : line) + "</span>";
+    }).join("");
+    varsEl.innerHTML = (f.vars || []).map(function (v) {
+      return '<span class="var' + (v.changed ? " changed" : "") + (v.dead ? " dead" : "") +
+             '"><b>' + esc(v.name) + "</b> = " + esc(v.value) + "</span>";
+    }).join("");
+    if (stripEl)  { stripEl.innerHTML  = cells(f.strip); }
+    if (stripEl2) { stripEl2.innerHTML = cells(f.strip2); }
+    // Not every demo has a console or a note panel -- a section that omits
+    // one is a layout choice, not a bug, so never assume the element is there.
+    if (outEl)  { outEl.textContent = f.out === "" ? " " : f.out; }
+    if (noteEl) { noteEl.innerHTML = f.note || "&nbsp;"; }
+    countEl.textContent = "step " + (i + 1) + " of " + frames.length;
+    bar.querySelector('[data-act="prev"]').disabled = (i === 0);
+    bar.querySelector('[data-act="next"]').disabled = (i === frames.length - 1);
+  }
+
+  function go(n) {
+    i = Math.max(0, Math.min(frames.length - 1, n));
+    draw();
+    if (timer && i === frames.length - 1) { stop(); }
+  }
+  function stop() { clearInterval(timer); timer = null; playBtn.textContent = "Play"; }
+  function play() {
+    if (timer) { stop(); return; }
+    if (i === frames.length - 1) { i = 0; }
+    playBtn.textContent = "Pause";
+    timer = setInterval(function () { go(i + 1); }, 750);
+  }
+
+  bar.addEventListener("click", function (e) {
+    var act = e.target.getAttribute("data-act");
+    if (!act) { return; }
+    if (act === "next") { stop(); go(i + 1); }
+    if (act === "prev") { stop(); go(i - 1); }
+    if (act === "reset") { stop(); go(0); }
+    if (act === "play") { play(); }
+  });
+
+  section.setAttribute("tabindex", "0");
+  section.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { stop(); go(i + 1); e.preventDefault(); }
+    if (e.key === "ArrowLeft")  { stop(); go(i - 1); e.preventDefault(); }
+  });
+
+  section.querySelectorAll("[data-opt]").forEach(function (el) {
+    el.addEventListener("change", function () { stop(); rebuild(); });
+  });
+
+  function opts() {
+    var o = {};
+    section.querySelectorAll("[data-opt]").forEach(function (el) {
+      o[el.getAttribute("data-opt")] = (el.type === "checkbox") ? el.checked : el.value;
+    });
+    return o;
+  }
+  function rebuild() { frames = build(opts()); i = 0; draw(); }
+  rebuild();
+}
+
+var HEAP_A = "0x7A10";   /* first heap block  */
+var HEAP_B = "0x7C40";   /* second heap block */
+
+/* ------------------------------------------------------------------ *
+ * Demo 1 -- new, delete, and the dangling pointer
+ * ------------------------------------------------------------------ */
+Stepper(document.getElementById("d1"), function () {
+  var code = [
+    '{',
+    '    <span class="ty">int</span>* p = <span class="kw">new</span> <span class="ty">int</span>(<span class="nu">42</span>);   <span class="cm">// 1. allocate</span>',
+    '',
+    '    std::cout &lt;&lt; *p;        <span class="cm">// 2. use it</span>',
+    '',
+    '    <span class="kw">delete</span> p;               <span class="cm">// 4. you must remember this</span>',
+    '    p = <span class="kw">nullptr</span>;            <span class="cm">//    ...and this</span>',
+    '}                            <span class="cm">// 3. scope ends</span>'
+  ];
+  var f = [];
+  f.push({ code: code, line: 0, out: "", strip: [{ text: "empty", state: "empty" }], vars: [],
+    note: "Before anything. The heap is empty." });
+  f.push({ code: code, line: 1, out: "",
+    strip: [{ text: "42", addr: HEAP_A, state: "live" }],
+    vars: [{ name: "p", value: HEAP_A, changed: true }],
+    note: "<b>new</b> does two things: it reserves room on the heap, and it hands back that address. " +
+          "<b>p</b> lives on the stack; the <b>42</b> does not." });
+  f.push({ code: code, line: 3, out: "42\n",
+    strip: [{ text: "42", addr: HEAP_A, state: "now" }],
+    vars: [{ name: "p", value: HEAP_A }],
+    note: "Reading through it is ordinary. Nothing here hints at who is responsible for freeing it." });
+  f.push({ code: code, line: 5, out: "42\n",
+    strip: [{ text: "free", addr: HEAP_A, state: "free" }],
+    vars: [{ name: "p", value: HEAP_A, dead: true }],
+    note: "<b>delete</b> hands the memory back. Look carefully at <b>p</b>: it <i>still holds " +
+          HEAP_A + "</i>. The delete freed the memory, not the pointer. <b>p</b> is now dangling &mdash; " +
+          "it looks perfectly valid and reading <b>*p</b> is undefined behaviour." });
+  f.push({ code: code, line: 6, out: "42\n",
+    strip: [{ text: "free", addr: HEAP_A, state: "free" }],
+    vars: [{ name: "p", value: "nullptr", changed: true }],
+    note: "Setting it to <b>nullptr</b> is what makes the danger visible. A null pointer crashes loudly " +
+          "and immediately; a dangling one usually works &mdash; until the day it does not." });
+  f.push({ code: code, line: 7, out: "42\n",
+    strip: [{ text: "free", addr: HEAP_A, state: "free" }],
+    vars: [{ name: "p", value: "gone", dead: true }],
+    note: "The brace destroys <b>p</b>, the stack variable. If you had skipped the <b>delete</b>, " +
+          "this is the moment the memory became unreachable &mdash; still allocated, with nothing " +
+          "left pointing at it. That is a leak." });
+  return f;
+});
+
+/* ------------------------------------------------------------------ *
+ * Demo 2 -- unique_ptr, same shape, no step 4
+ * ------------------------------------------------------------------ */
+Stepper(document.getElementById("d2"), function (o) {
+  var smart = (o.own || "smart") === "smart";
+  var code = smart ? [
+    '{',
+    '    <span class="kw">auto</span> p = std::<span class="fn">make_unique</span>&lt;<span class="ty">int</span>&gt;(<span class="nu">42</span>);',
+    '',
+    '    std::cout &lt;&lt; *p;',
+    '',
+    '}                            <span class="cm">// destructor frees it here</span>'
+  ] : [
+    '{',
+    '    <span class="ty">int</span>* p = <span class="kw">new</span> <span class="ty">int</span>(<span class="nu">42</span>);',
+    '',
+    '    std::cout &lt;&lt; *p;',
+    '',
+    '    <span class="kw">delete</span> p;               <span class="cm">// you must write this</span>',
+    '    p = <span class="kw">nullptr</span>;            <span class="cm">// and this</span>',
+    '}'
+  ];
+  var f = [];
+  f.push({ code: code, line: 1, out: "",
+    strip: [{ text: "42", addr: HEAP_A, state: "live" }],
+    vars: [{ name: "p", value: HEAP_A, changed: true }],
+    note: "Allocate. <b>The picture is identical either way</b> &mdash; same stack pointer, same heap box." });
+  f.push({ code: code, line: 3, out: "42\n",
+    strip: [{ text: "42", addr: HEAP_A, state: "now" }],
+    vars: [{ name: "p", value: HEAP_A }],
+    note: "Use it. Still identical: <b>*p</b> reads through it exactly the same way." });
+  if (smart) {
+    f.push({ code: code, line: 5, out: "42\n",
+      strip: [{ text: "free", addr: HEAP_A, state: "free" }],
+      vars: [{ name: "p", value: "gone" }],
+      note: "The brace runs <b>~unique_ptr()</b>, which calls <b>delete</b> on the way out. " +
+            "<b>There is no step 4.</b> You cannot forget a line you never had to write." });
+    f.push({ code: code, line: null, out: "42\n",
+      strip: [{ text: "empty", state: "empty" }], vars: [],
+      note: "Two lines of code, nothing to remember, and a leak here is <i>impossible</i>. " +
+            "Switch the dropdown and count the difference." });
+  } else {
+    f.push({ code: code, line: 5, out: "42\n",
+      strip: [{ text: "free", addr: HEAP_A, state: "free" }],
+      vars: [{ name: "p", value: HEAP_A, dead: true }],
+      note: "<b>Step 4a.</b> You had to remember this line. Forget it and the memory leaks." });
+    f.push({ code: code, line: 6, out: "42\n",
+      strip: [{ text: "free", addr: HEAP_A, state: "free" }],
+      vars: [{ name: "p", value: "nullptr", changed: true }],
+      note: "<b>Step 4b.</b> And this one. Forget it and <b>p</b> dangles." });
+    f.push({ code: code, line: 7, out: "42\n",
+      strip: [{ text: "empty", state: "empty" }], vars: [],
+      note: "Same end state as the smart pointer &mdash; reached by remembering two extra lines, " +
+            "at every single exit from the scope. Now imagine an early <b>return</b> in the middle." });
+  }
+  return f;
+});
+
+/* ------------------------------------------------------------------ *
+ * Demo 3 -- the resize-copy pattern
+ *
+ * This is the one that justifies the whole file. The step where newArr
+ * exists but arr has not been freed yet -- two live arrays, one of them
+ * about to become unreachable -- is exactly what students get wrong.
+ * ------------------------------------------------------------------ */
+Stepper(document.getElementById("d3"), function () {
+  var code = [
+    '<span class="cm">// arr is full: count == capacity</span>',
+    '<span class="ty">int</span> newCapacity = capacity * <span class="nu">2</span>;',
+    '<span class="ty">int</span>* newArr = <span class="kw">new</span> <span class="ty">int</span>[newCapacity];',
+    '',
+    '<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nu">0</span>; i &lt; count; ++i) {',
+    '    newArr[i] = arr[i];',
+    '}',
+    '',
+    '<span class="kw">delete</span>[] arr;        <span class="cm">// free the OLD block</span>',
+    'arr = newArr;         <span class="cm">// repoint</span>',
+    'capacity = newCapacity;'
+  ];
+  var OLD = [10, 20, 30, 40];
+  function oldCells(state) {
+    return [{ label: "arr" }].concat(OLD.map(function (v, k) {
+      return { text: String(v), addr: HEAP_A.replace("10", (0x10 + k * 4).toString(16).toUpperCase()),
+               state: state === "free" ? "free" : (state === "leak" ? "leak" : "live") };
+    }));
+  }
+  function newCells(filled, nowIdx) {
+    var c = [{ label: "newArr" }];
+    for (var k = 0; k < 8; k++) {
+      c.push({ text: k < filled ? String(OLD[k]) : "?",
+               state: k === nowIdx ? "now" : (k < filled ? "copied" : "empty") });
+    }
+    return c;
+  }
+  var f = [];
+  f.push({ code: code, line: 0, strip: oldCells("live"), strip2: [{ text: "not yet", state: "empty" }],
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" }],
+    note: "The array is full. There is no such thing as growing a heap array in place &mdash; " +
+          "you allocate a bigger one and move the contents." });
+  f.push({ code: code, line: 1, strip: oldCells("live"), strip2: [{ text: "not yet", state: "empty" }],
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" },
+           { name: "newCapacity", value: "8", changed: true }],
+    note: "Doubling is the usual choice. Growing by one each time would make every single add " +
+          "an allocation and a full copy." });
+  f.push({ code: code, line: 2, strip: oldCells("live"), strip2: newCells(0, -1),
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" },
+           { name: "newCapacity", value: "8" }, { name: "newArr", value: HEAP_B, changed: true }],
+    note: "<b>Two arrays are now alive at once.</b> This is the step that matters. The new one is " +
+          "uninitialised &mdash; those slots hold whatever was in that memory before." });
+  for (var k = 0; k < 4; k++) {
+    f.push({ code: code, line: 5, strip: oldCells("live"), strip2: newCells(k + 1, k),
+      vars: [{ name: "i", value: String(k), changed: true }, { name: "count", value: "4" },
+             { name: "newArr", value: HEAP_B }],
+      note: "Copy element " + k + ": <b>" + OLD[k] + "</b> is now in both arrays. The loop runs to " +
+            "<b>count</b>, not to <b>newCapacity</b> &mdash; only " + 4 + " slots hold real data." });
+  }
+  f.push({ code: code, line: 8, strip: oldCells("free"), strip2: newCells(4, -1),
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" },
+           { name: "arr", value: HEAP_A + "  (dangling)", dead: true },
+           { name: "newArr", value: HEAP_B }],
+    note: "<b>delete[]</b> frees the old block. Note the brackets: it was allocated with <b>new[]</b>, " +
+          "so it must be freed with <b>delete[]</b>. <b>arr</b> is dangling for exactly one line." });
+  f.push({ code: code, line: 9, strip: [{ text: "returned to the heap", state: "free" }], strip2: newCells(4, -1),
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" },
+           { name: "arr", value: HEAP_B, changed: true }, { name: "newArr", value: HEAP_B }],
+    note: "Repoint. <b>arr</b> and <b>newArr</b> now name the same block &mdash; that is fine, " +
+          "<b>newArr</b> is a local about to go out of scope. Only one of them owns it." });
+  f.push({ code: code, line: 10, strip: [{ text: "returned to the heap", state: "free" }], strip2: newCells(4, -1),
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "8", changed: true },
+           { name: "arr", value: HEAP_B }],
+    note: "Update <b>capacity</b> last. Forget this line and the array believes it is still full, " +
+          "so it resizes on every add &mdash; correct output, terrible performance." });
+  f.push({ code: code, line: null, strip: [{ text: "returned to the heap", state: "free" }], strip2: newCells(4, -1),
+    vars: [{ name: "count", value: "4" }, { name: "capacity", value: "8" }, { name: "arr", value: HEAP_B }],
+    note: "Room for four more. <b>The order is the whole trick: allocate, copy, free, repoint.</b> " +
+          "Any other order either loses the data or leaks the block." });
+  return f;
+});
+
+/* ------------------------------------------------------------------ *
+ * Demo 4 -- the three ways to get it wrong
+ * ------------------------------------------------------------------ */
+Stepper(document.getElementById("d4"), function (o) {
+  var bug = o.bug || "none";
+  var lines = {
+    none:     '<span class="kw">delete</span>[] arr;  arr = newArr;',
+    nodelete: '<span class="cm">// (no delete[] at all)</span>  arr = newArr;',
+    early:    '<span class="kw">delete</span>[] arr;  <span class="cm">// ...then copy</span>',
+    single:   '<span class="kw">delete</span> arr;    arr = newArr;   <span class="cm">// no brackets</span>'
+  };
+  var code = [
+    '<span class="ty">int</span>* newArr = <span class="kw">new</span> <span class="ty">int</span>[newCapacity];',
+    (bug === "early" ? lines.early : '<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nu">0</span>; i &lt; count; ++i) newArr[i] = arr[i];'),
+    (bug === "early" ? '<span class="kw">for</span> (<span class="ty">int</span> i = <span class="nu">0</span>; i &lt; count; ++i) newArr[i] = arr[i];  <span class="cm">// reads freed memory</span>' : lines[bug]),
+    'capacity = newCapacity;'
+  ];
+  var verdict = {
+    none:     "Correct.\nNo leak, no dangling read.",
+    nodelete: "LEAK.\n4 ints, unreachable\nfor the rest of the run.",
+    early:    "UNDEFINED BEHAVIOUR.\nCopying out of memory\nthat was already freed.",
+    single:   "UNDEFINED BEHAVIOUR.\nnew[] must be matched\nby delete[], not delete."
+  };
+  var notes = {
+    none:     "Allocate, copy, free, repoint. Nothing is read after it is freed, and nothing is " +
+              "abandoned while still allocated.",
+    nodelete: "The commonest bug in the lab. Everything <i>works</i> &mdash; the output is right, the " +
+              "tests pass, nothing crashes. The old block is simply abandoned. Do this inside a loop " +
+              "that resizes repeatedly and the program grows without bound.",
+    early:    "Freeing first looks tidier and is catastrophic. The copy loop then reads memory the " +
+              "allocator has taken back. It will often appear to work, because the bytes are usually " +
+              "still sitting there &mdash; until something else reuses them.",
+    single:   "<b>new[]</b> and <b>delete[]</b> are a matched pair, as are <b>new</b> and <b>delete</b>. " +
+              "Mixing them is undefined behaviour even when it seems to run: the array form is what " +
+              "knows how many elements there are."
+  };
+  var strips = {
+    none:     [{ label: "old" }, { text: "freed", state: "free" }, { label: "new" },
+               { text: "10", state: "copied" }, { text: "20", state: "copied" },
+               { text: "30", state: "copied" }, { text: "40", state: "copied" },
+               { text: "?", state: "empty" }, { text: "?", state: "empty" },
+               { text: "?", state: "empty" }, { text: "?", state: "empty" }],
+    nodelete: [{ label: "old" }, { text: "10", state: "leak" }, { text: "20", state: "leak" },
+               { text: "30", state: "leak" }, { text: "40", state: "leak" }, { label: "new" },
+               { text: "10", state: "copied" }, { text: "20", state: "copied" },
+               { text: "30", state: "copied" }, { text: "40", state: "copied" }],
+    early:    [{ label: "old" }, { text: "freed", state: "free" }, { label: "new" },
+               { text: "??", state: "leak" }, { text: "??", state: "leak" },
+               { text: "??", state: "leak" }, { text: "??", state: "leak" }],
+    single:   [{ label: "old" }, { text: "partly freed", state: "leak" }, { label: "new" },
+               { text: "10", state: "copied" }, { text: "20", state: "copied" },
+               { text: "30", state: "copied" }, { text: "40", state: "copied" }]
+  };
+  var f = [];
+  f.push({ code: code, line: 0, strip: strips.none.slice(0, 1).concat([{ text: "...", state: "empty" }]),
+    out: "", vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" }],
+    note: "Same starting point every time: a full array of 4, and a new block of 8 just allocated." });
+  f.push({ code: code, line: 1, strip: strips.none, out: "",
+    vars: [{ name: "count", value: "4" }, { name: "newArr", value: HEAP_B }],
+    note: "Step through with the dropdown set to each mistake in turn." });
+  f.push({ code: code, line: 2, strip: strips[bug], out: verdict[bug],
+    vars: [{ name: "count", value: "4" }, { name: "arr", value: HEAP_B, changed: bug === "none" },
+           { name: "capacity", value: "4" }],
+    note: notes[bug] });
+  f.push({ code: code, line: 3, strip: strips[bug], out: verdict[bug],
+    vars: [{ name: "count", value: "4" }, { name: "arr", value: HEAP_B },
+           { name: "capacity", value: "8", changed: true }],
+    note: bug === "none"
+      ? "Clean. Compare this heap panel against the other three options."
+      : "Note that the program carries on regardless. <b>None of these three mistakes stops it " +
+        "compiling or running</b>, which is exactly why they are worth stepping through."});
+  return f;
+});
+</script>
+</body>
+</html>

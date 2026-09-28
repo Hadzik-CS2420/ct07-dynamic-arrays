@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 700" font-family="Segoe UI, system-ui, sans-serif" font-size="13" role="img" aria-label="A step-by-step comparison of managing one heap integer by hand with new and delete, against letting a unique_ptr do it. The two columns run down the page in matching steps so the same moment can be compared across. Step 1, allocate: on the left, int star p equals new int of 42 puts a pointer named p on the stack with an arrow to a heap box holding 42; on the right, auto p equals make_unique of 42 produces the same stack pointer and the same heap box, and a label notes the picture is identical so far. Step 2, use it: both sides print star p and both print 42, with a note that reading through the pointer is the same either way. Step 3, the scope ends: on the left nothing happens automatically, the closing brace destroys only the pointer variable while the heap box survives with nobody pointing at it, which is a leak; on the right the closing brace runs the unique_ptr destructor, which deletes the heap box, so the heap is empty and the leak is impossible. Step 4, only the left column has one: you must remember to write delete p and then p equals nullptr, and a red panel explains that forgetting either is the whole problem, delete without nullptr leaves a dangling pointer that still looks valid. The right column ends after step 3 with a green panel reading nothing to remember. A closing line states the rule: if you can name the owner, a smart pointer can be that owner.">
+  <title>Heap lifetime step by step: raw new and delete versus unique_ptr</title>
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- ==================== TITLE ==================== -->
+  <text x="570" y="32" text-anchor="middle" font-size="19" font-weight="bold" fill="#2c3e50">One Heap Integer, Step by Step</text>
+  <text x="570" y="54" text-anchor="middle" font-size="13" fill="#6e6e6e">The same four moments, managed by hand on the left and by a unique_ptr on the right</text>
+
+  <!-- ==================== COLUMN HEADERS ==================== -->
+  <rect x="40" y="72" width="500" height="34" rx="6" fill="#fff3e0" stroke="#a95c19" stroke-width="1.5"/>
+  <text x="290" y="94" text-anchor="middle" font-size="15" font-weight="bold" fill="#c64500">By hand &#x2014; new / delete</text>
+
+  <rect x="600" y="72" width="500" height="34" rx="6" fill="#e8f5e9" stroke="#1c7e45" stroke-width="1.5"/>
+  <text x="850" y="94" text-anchor="middle" font-size="15" font-weight="bold" fill="#1b5e20">Owned &#x2014; std::unique_ptr</text>
+
+  <!-- ==================== STEP 1 ==================== -->
+  <text x="40" y="136" font-size="14" font-weight="bold" fill="#4527a0">Step 1 &#x2014; allocate</text>
+  <line x1="168" y1="131" x2="1100" y2="131" stroke="#e0e0e0" stroke-width="1"/>
+
+  <text x="56" y="162" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">int* p = new int(42);</text>
+  <rect x="56" y="176" width="96" height="40" rx="4" fill="#eaf2f8" stroke="#2573a7" stroke-width="1.5"/>
+  <text x="104" y="192" text-anchor="middle" font-size="11" fill="#2573a7">STACK</text>
+  <text x="104" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#2c3e50">p</text>
+  <line x1="152" y1="196" x2="236" y2="196" stroke="#555555" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="240" y="176" width="96" height="40" rx="4" fill="#fef5ec" stroke="#a95c19" stroke-width="1.5"/>
+  <text x="288" y="192" text-anchor="middle" font-size="11" fill="#a95c19">HEAP</text>
+  <text x="288" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#2c3e50">42</text>
+
+  <text x="616" y="162" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">auto p = std::make_unique&lt;int&gt;(42);</text>
+  <rect x="616" y="176" width="96" height="40" rx="4" fill="#eaf2f8" stroke="#2573a7" stroke-width="1.5"/>
+  <text x="664" y="192" text-anchor="middle" font-size="11" fill="#2573a7">STACK</text>
+  <text x="664" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#2c3e50">p</text>
+  <line x1="712" y1="196" x2="796" y2="196" stroke="#555555" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="800" y="176" width="96" height="40" rx="4" fill="#fef5ec" stroke="#a95c19" stroke-width="1.5"/>
+  <text x="848" y="192" text-anchor="middle" font-size="11" fill="#a95c19">HEAP</text>
+  <text x="848" y="208" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#2c3e50">42</text>
+  <text x="916" y="200" font-size="11.5" fill="#6e6e6e">identical so far</text>
+
+  <!-- ==================== STEP 2 ==================== -->
+  <text x="40" y="264" font-size="14" font-weight="bold" fill="#4527a0">Step 2 &#x2014; use it</text>
+  <line x1="150" y1="259" x2="1100" y2="259" stroke="#e0e0e0" stroke-width="1"/>
+
+  <text x="56" y="290" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">std::cout &lt;&lt; *p;</text>
+  <text x="56" y="310" font-size="12" fill="#1b5e20">prints 42</text>
+
+  <text x="616" y="290" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">std::cout &lt;&lt; *p;</text>
+  <text x="616" y="310" font-size="12" fill="#1b5e20">prints 42</text>
+  <text x="760" y="310" font-size="11.5" fill="#6e6e6e">reading through it is the same either way</text>
+
+  <!-- ==================== STEP 3 ==================== -->
+  <text x="40" y="352" font-size="14" font-weight="bold" fill="#4527a0">Step 3 &#x2014; the scope ends</text>
+  <line x1="222" y1="347" x2="1100" y2="347" stroke="#e0e0e0" stroke-width="1"/>
+
+  <text x="56" y="378" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">}</text>
+  <text x="76" y="378" font-size="12" font-weight="bold" fill="#c0392b">nothing happens automatically</text>
+  <rect x="56" y="392" width="96" height="40" rx="4" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="104" y="408" text-anchor="middle" font-size="11" fill="#6e6e6e">STACK</text>
+  <text x="104" y="424" text-anchor="middle" font-size="11" fill="#6e6e6e">p is gone</text>
+  <rect x="240" y="392" width="96" height="40" rx="4" fill="#fce4ec" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="288" y="408" text-anchor="middle" font-size="11" fill="#c0392b">HEAP</text>
+  <text x="288" y="424" text-anchor="middle" font-family="Consolas, monospace" font-size="12" fill="#2c3e50">42</text>
+  <text x="352" y="416" font-size="11.5" font-weight="bold" fill="#c0392b">still there &#x2014; leaked</text>
+  <text x="56" y="452" font-size="11.5" fill="#6e6e6e">the brace destroys the pointer, not what it points at</text>
+
+  <text x="616" y="378" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">}</text>
+  <text x="636" y="378" font-size="12" font-weight="bold" fill="#1b5e20">the destructor runs</text>
+  <rect x="616" y="392" width="96" height="40" rx="4" fill="#f5f5f5" stroke="#9e9e9e" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="664" y="408" text-anchor="middle" font-size="11" fill="#6e6e6e">STACK</text>
+  <text x="664" y="424" text-anchor="middle" font-size="11" fill="#6e6e6e">p is gone</text>
+  <rect x="800" y="392" width="96" height="40" rx="4" fill="#f2fbf4" stroke="#1c7e45" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text x="848" y="408" text-anchor="middle" font-size="11" fill="#1c7e45">HEAP</text>
+  <text x="848" y="424" text-anchor="middle" font-size="11" fill="#1c7e45">freed</text>
+  <text x="912" y="416" font-size="11.5" font-weight="bold" fill="#1b5e20">leak impossible</text>
+  <text x="616" y="452" font-size="11.5" fill="#6e6e6e">~unique_ptr() calls delete for you &#x2014; this is RAII</text>
+
+  <!-- ==================== STEP 4 ==================== -->
+  <text x="40" y="496" font-size="14" font-weight="bold" fill="#4527a0">Step 4 &#x2014; only one side has one</text>
+  <line x1="290" y1="491" x2="1100" y2="491" stroke="#e0e0e0" stroke-width="1"/>
+
+  <text x="56" y="522" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">delete p;</text>
+  <text x="56" y="542" font-family="Consolas, monospace" font-size="12.5" fill="#2c3e50">p = nullptr;</text>
+  <text x="180" y="532" font-size="12" font-weight="bold" fill="#c64500">you have to remember both</text>
+
+  <rect x="56" y="558" width="484" height="86" rx="6" fill="#fce4ec" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="70" y="578" font-size="12" font-weight="bold" fill="#c0392b">This step is the whole problem.</text>
+  <text x="70" y="597" font-size="11.5" fill="#2c3e50">Forget the delete and the memory leaks, as in Step 3.</text>
+  <text x="70" y="614" font-size="11.5" fill="#2c3e50">Do the delete but not the nullptr and p still holds the old</text>
+  <text x="70" y="631" font-size="11.5" fill="#2c3e50">address &#x2014; a dangling pointer that still looks valid.</text>
+
+  <rect x="616" y="558" width="484" height="86" rx="6" fill="#e8f5e9" stroke="#1c7e45" stroke-width="1.5"/>
+  <text x="630" y="578" font-size="12" font-weight="bold" fill="#1b5e20">Nothing to remember.</text>
+  <text x="630" y="597" font-size="11.5" fill="#2c3e50">There is no Step 4 on this side. The owner is named in the</text>
+  <text x="630" y="614" font-size="11.5" fill="#2c3e50">type, so the compiler knows when to free it. You cannot</text>
+  <text x="630" y="631" font-size="11.5" fill="#2c3e50">forget a line you never had to write.</text>
+
+  <!-- ==================== CLOSING RULE ==================== -->
+  <rect x="40" y="660" width="1060" height="28" rx="6" fill="#ede7f6" stroke="#4527a0" stroke-width="1.5"/>
+  <text x="570" y="679" text-anchor="middle" font-size="12.5" fill="#4527a0">The rule: if you can name the owner, a smart pointer can <tspan font-style="italic">be</tspan> that owner. Reach for new and delete only when you cannot.</text>
+
+  <defs>
+    <marker id="a1" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#555555"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,8 +1,15 @@
-# CT6 – Building a Simple Dynamic Array (Resize + Copy)
+# Code-Together 07: Dynamic Arrays (Resize + Copy)
 
 ## Overview
 
 An in-class code-together activity covering heap allocation, dynamic memory management, and the resize-copy pattern used by `std::vector`. Students complete TODO items in three source files while the instructor walks through concepts using discussion comments.
+
+> ▶️ **Watch it run, one step at a time.** Your repo has
+> `images/stepper.html` — **double-click it** to open it in your browser and
+> press **Next**. It steps through `new`/`delete`, `unique_ptr`, and the resize-copy pattern — including the few steps where **two arrays are alive at once**, which is the part a still picture cannot show. Nothing to install, and it works offline.
+>
+> The still pictures of the same ideas are in `images/`, and the Diagrams
+> table below says what each one is for.
 
 ## Files
 
@@ -52,6 +59,7 @@ SVG sources are in `images/svg/`, PNG exports in `images/`.
 | `two_d_spine` | `two_dimensional_arrays.cpp` | Step 1: spine allocation — array of uninitialized pointers |
 | `two_d_rows` | `two_dimensional_arrays.cpp` | Step 2: full picture after row allocation + delete order |
 | `two_d_flat` | `two_dimensional_arrays.cpp` | Flat array layout, index formula, pointer-to-pointer vs flat comparison |
+| `lifetime_step_by_step` | Canvas concept page | One heap `int` through four moments &mdash; raw `new`/`delete` beside `unique_ptr`, showing they only diverge at the closing brace |
 
 ## Comment Conventions
 

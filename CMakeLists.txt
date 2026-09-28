@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
-project(ct6-dynamic-arrays LANGUAGES CXX)
+project(ct07-dynamic-arrays LANGUAGES CXX)
+
+# Write build/compile_commands.json so C++ IntelliSense knows the real
+# include paths and flags instead of guessing at them.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
