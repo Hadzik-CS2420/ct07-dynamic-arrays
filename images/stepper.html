@@ -289,7 +289,7 @@
 })();
 
 /* The harness. Frames are computed up front, so Prev is just an index going
-   down and can never desynchronise from the code.
+   down and can never desynchronize from the code.
    A frame is: { code, line, vars, out, strip, strip2, note } */
 
 function esc(s) {
@@ -423,7 +423,7 @@ Stepper(document.getElementById("d1"), function () {
     vars: [{ name: "p", value: HEAP_A, dead: true }],
     note: "<b>delete</b> hands the memory back. Look carefully at <b>p</b>: it <i>still holds " +
           HEAP_A + "</i>. The delete freed the memory, not the pointer. <b>p</b> is now dangling &mdash; " +
-          "it looks perfectly valid and reading <b>*p</b> is undefined behaviour." });
+          "it looks perfectly valid and reading <b>*p</b> is undefined behavior." });
   f.push({ code: code, line: 6, out: "42\n",
     strip: [{ text: "free", addr: HEAP_A, state: "free" }],
     vars: [{ name: "p", value: "nullptr", changed: true }],
@@ -546,7 +546,7 @@ Stepper(document.getElementById("d3"), function () {
     vars: [{ name: "count", value: "4" }, { name: "capacity", value: "4" },
            { name: "newCapacity", value: "8" }, { name: "newArr", value: HEAP_B, changed: true }],
     note: "<b>Two arrays are now alive at once.</b> This is the step that matters. The new one is " +
-          "uninitialised &mdash; those slots hold whatever was in that memory before." });
+          "uninitialized &mdash; those slots hold whatever was in that memory before." });
   for (var k = 0; k < 4; k++) {
     f.push({ code: code, line: 5, strip: oldCells("live"), strip2: newCells(k + 1, k),
       vars: [{ name: "i", value: String(k), changed: true }, { name: "count", value: "4" },
@@ -597,8 +597,8 @@ Stepper(document.getElementById("d4"), function (o) {
   var verdict = {
     none:     "Correct.\nNo leak, no dangling read.",
     nodelete: "LEAK.\n4 ints, unreachable\nfor the rest of the run.",
-    early:    "UNDEFINED BEHAVIOUR.\nCopying out of memory\nthat was already freed.",
-    single:   "UNDEFINED BEHAVIOUR.\nnew[] must be matched\nby delete[], not delete."
+    early:    "UNDEFINED Behavior.\nCopying out of memory\nthat was already freed.",
+    single:   "UNDEFINED Behavior.\nnew[] must be matched\nby delete[], not delete."
   };
   var notes = {
     none:     "Allocate, copy, free, repoint. Nothing is read after it is freed, and nothing is " +
@@ -610,7 +610,7 @@ Stepper(document.getElementById("d4"), function (o) {
               "allocator has taken back. It will often appear to work, because the bytes are usually " +
               "still sitting there &mdash; until something else reuses them.",
     single:   "<b>new[]</b> and <b>delete[]</b> are a matched pair, as are <b>new</b> and <b>delete</b>. " +
-              "Mixing them is undefined behaviour even when it seems to run: the array form is what " +
+              "Mixing them is undefined behavior even when it seems to run: the array form is what " +
               "knows how many elements there are."
   };
   var strips = {
