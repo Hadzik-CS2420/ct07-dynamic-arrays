@@ -1,5 +1,5 @@
 {
-  "name": "CS 2420 C++ Dev Environment",
+  "name": "CS 2420 · ct07-dynamic-arrays",
   "image": "mcr.microsoft.com/devcontainers/cpp:1-ubuntu-24.04",
   "containerEnv": {
     "CC": "gcc-13",

@@ -1,61 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 340" font-family="Consolas, 'Courier New', monospace" font-size="14">
   <defs>
     <marker id="arrow-pink" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#c586c0"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#af00db"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="860" height="340" fill="#1e1e1e" rx="8"/>
+  <rect width="860" height="340" fill="#ffffff" rx="8"/>
 
   <!-- Title -->
-  <text x="430" y="35" text-anchor="middle" fill="#569cd6" font-size="18" font-weight="bold">Step 1: Allocate the Spine</text>
-  <text x="430" y="58" text-anchor="middle" fill="#608b4e" font-size="12">int** table = new int*[rows];   // rows = 3</text>
+  <text x="430" y="35" text-anchor="middle" fill="#0000ff" font-size="18" font-weight="bold">Step 1: Allocate the Spine</text>
+  <text x="430" y="58" text-anchor="middle" fill="#008000" font-size="12">int** table = new int*[rows];   // rows = 3</text>
 
   <!-- STACK label -->
-  <text x="30" y="100" fill="#569cd6" font-size="11" font-weight="bold">STACK</text>
-  <line x1="30" y1="104" x2="150" y2="104" stroke="#569cd6" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="30" y="100" fill="#0000ff" font-size="11" font-weight="bold">STACK</text>
+  <line x1="30" y1="104" x2="150" y2="104" stroke="#0000ff" stroke-width="1" stroke-dasharray="3,2"/>
 
   <!-- HEAP label -->
-  <text x="250" y="100" fill="#4ec9b0" font-size="11" font-weight="bold">HEAP</text>
-  <line x1="250" y1="104" x2="820" y2="104" stroke="#4ec9b0" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="250" y="100" fill="#267f99" font-size="11" font-weight="bold">HEAP</text>
+  <line x1="250" y1="104" x2="820" y2="104" stroke="#267f99" stroke-width="1" stroke-dasharray="3,2"/>
 
   <!-- table variable on stack -->
-  <rect x="30" y="120" width="120" height="50" rx="6" fill="#2d2d2d" stroke="#c586c0" stroke-width="2"/>
-  <text x="90" y="141" text-anchor="middle" fill="#c586c0" font-size="11" font-weight="bold">int**</text>
-  <text x="90" y="160" text-anchor="middle" fill="#9cdcfe" font-size="13">table</text>
+  <rect x="30" y="120" width="120" height="50" rx="6" fill="#f3f3f3" stroke="#af00db" stroke-width="2"/>
+  <text x="90" y="141" text-anchor="middle" fill="#af00db" font-size="11" font-weight="bold">int**</text>
+  <text x="90" y="160" text-anchor="middle" fill="#001080" font-size="13">table</text>
 
   <!-- Arrow from table to spine -->
-  <line x1="150" y1="145" x2="260" y2="145" stroke="#c586c0" stroke-width="2" marker-end="url(#arrow-pink)"/>
+  <line x1="150" y1="145" x2="260" y2="145" stroke="#af00db" stroke-width="2" marker-end="url(#arrow-pink)"/>
 
   <!-- Spine: array of 3 int* pointers -->
-  <rect x="260" y="112" width="140" height="156" rx="6" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="330" y="280" text-anchor="middle" fill="#569cd6" font-size="11">Spine: array of 3 pointers</text>
+  <rect x="260" y="112" width="140" height="156" rx="6" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="330" y="280" text-anchor="middle" fill="#0000ff" font-size="11">Spine: array of 3 pointers</text>
 
   <!-- table[0] — uninitialized -->
-  <rect x="272" y="122" width="116" height="36" rx="4" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="330" y="145" text-anchor="middle" fill="#9cdcfe" font-size="12">table[0]</text>
-  <text x="420" y="145" fill="#aaa" font-size="11">→  ???</text>
+  <rect x="272" y="122" width="116" height="36" rx="4" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="330" y="145" text-anchor="middle" fill="#001080" font-size="12">table[0]</text>
+  <text x="420" y="145" fill="#6e6e6e" font-size="11">→  ???</text>
 
   <!-- table[1] — uninitialized -->
-  <rect x="272" y="166" width="116" height="36" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="330" y="189" text-anchor="middle" fill="#9cdcfe" font-size="12">table[1]</text>
-  <text x="420" y="189" fill="#aaa" font-size="11">→  ???</text>
+  <rect x="272" y="166" width="116" height="36" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="330" y="189" text-anchor="middle" fill="#001080" font-size="12">table[1]</text>
+  <text x="420" y="189" fill="#6e6e6e" font-size="11">→  ???</text>
 
   <!-- table[2] — uninitialized -->
-  <rect x="272" y="210" width="116" height="36" rx="4" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="330" y="233" text-anchor="middle" fill="#9cdcfe" font-size="12">table[2]</text>
-  <text x="420" y="233" fill="#aaa" font-size="11">→  ???</text>
+  <rect x="272" y="210" width="116" height="36" rx="4" fill="#ffffff" stroke="#267f99" stroke-width="1.5"/>
+  <text x="330" y="233" text-anchor="middle" fill="#001080" font-size="12">table[2]</text>
+  <text x="420" y="233" fill="#6e6e6e" font-size="11">→  ???</text>
 
   <!-- Explanation callout -->
-  <rect x="520" y="120" width="310" height="75" rx="6" fill="#c586c015" stroke="#c586c0" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="530" y="140" fill="#c586c0" font-size="11" font-weight="bold">What just happened:</text>
-  <text x="530" y="158" fill="#d4d4d4" font-size="10">• Allocated an array of 3 pointers on the heap</text>
-  <text x="530" y="174" fill="#d4d4d4" font-size="10">• Each pointer is uninitialized (garbage)</text>
-  <text x="530" y="190" fill="#d4d4d4" font-size="10">• They don't point anywhere useful yet!</text>
+  <rect x="520" y="120" width="310" height="75" rx="6" fill="#af00db15" stroke="#af00db" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="530" y="140" fill="#af00db" font-size="11" font-weight="bold">What just happened:</text>
+  <text x="530" y="158" fill="#2c3e50" font-size="10">• Allocated an array of 3 pointers on the heap</text>
+  <text x="530" y="174" fill="#2c3e50" font-size="10">• Each pointer is uninitialized (garbage)</text>
+  <text x="530" y="190" fill="#2c3e50" font-size="10">• They don't point anywhere useful yet!</text>
 
   <!-- Next step hint -->
-  <rect x="520" y="210" width="310" height="46" rx="6" fill="#569cd615" stroke="#569cd6" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="530" y="230" fill="#569cd6" font-size="11" font-weight="bold">Next: allocate each row</text>
-  <text x="530" y="248" fill="#d4d4d4" font-size="10">table[i] = new int[cols];</text>
+  <rect x="520" y="210" width="310" height="46" rx="6" fill="#0000ff15" stroke="#0000ff" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="530" y="230" fill="#0000ff" font-size="11" font-weight="bold">Next: allocate each row</text>
+  <text x="530" y="248" fill="#2c3e50" font-size="10">table[i] = new int[cols];</text>
 </svg>

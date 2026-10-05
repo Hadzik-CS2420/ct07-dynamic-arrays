@@ -1,106 +1,106 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" font-family="Consolas, 'Courier New', monospace" font-size="14">
 
   <!-- Background -->
-  <rect width="860" height="480" fill="#1e1e1e" rx="8"/>
+  <rect width="860" height="480" fill="#ffffff" rx="8"/>
 
   <!-- Title -->
-  <text x="430" y="35" text-anchor="middle" fill="#569cd6" font-size="18" font-weight="bold">Static 2D Array — "Array of Arrays"</text>
-  <text x="430" y="55" text-anchor="middle" fill="#608b4e" font-size="12">int grid[2][3] = { {1,2,3}, {4,5,6} };</text>
+  <text x="430" y="35" text-anchor="middle" fill="#0000ff" font-size="18" font-weight="bold">Static 2D Array — "Array of Arrays"</text>
+  <text x="430" y="55" text-anchor="middle" fill="#008000" font-size="12">int grid[2][3] = { {1,2,3}, {4,5,6} };</text>
 
   <!-- ============================================================ -->
   <!-- CONCEPTUAL VIEW: 2 rows × 3 columns grid                    -->
   <!-- ============================================================ -->
-  <text x="30" y="95" fill="#c586c0" font-size="15" font-weight="bold">How you think about it: rows and columns</text>
+  <text x="30" y="95" fill="#af00db" font-size="15" font-weight="bold">How you think about it: rows and columns</text>
 
   <!-- Column headers -->
-  <text x="262" y="125" text-anchor="middle" fill="#aaa" font-size="10">col 0</text>
-  <text x="372" y="125" text-anchor="middle" fill="#aaa" font-size="10">col 1</text>
-  <text x="482" y="125" text-anchor="middle" fill="#aaa" font-size="10">col 2</text>
+  <text x="262" y="125" text-anchor="middle" fill="#6e6e6e" font-size="10">col 0</text>
+  <text x="372" y="125" text-anchor="middle" fill="#6e6e6e" font-size="10">col 1</text>
+  <text x="482" y="125" text-anchor="middle" fill="#6e6e6e" font-size="10">col 2</text>
 
   <!-- Row 0 label -->
-  <text x="160" y="160" text-anchor="end" fill="#569cd6" font-size="12" font-weight="bold">Row 0</text>
+  <text x="160" y="160" text-anchor="end" fill="#0000ff" font-size="12" font-weight="bold">Row 0</text>
 
   <!-- Row 0 cells -->
-  <rect x="195" y="135" width="110" height="38" rx="4" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="250" y="160" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">1</text>
-  <text x="250" y="183" text-anchor="middle" fill="#aaa" font-size="9">[0][0]</text>
+  <rect x="195" y="135" width="110" height="38" rx="4" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="250" y="160" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">1</text>
+  <text x="250" y="183" text-anchor="middle" fill="#6e6e6e" font-size="9">[0][0]</text>
 
-  <rect x="315" y="135" width="110" height="38" rx="4" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="370" y="160" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">2</text>
-  <text x="370" y="183" text-anchor="middle" fill="#aaa" font-size="9">[0][1]</text>
+  <rect x="315" y="135" width="110" height="38" rx="4" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="370" y="160" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">2</text>
+  <text x="370" y="183" text-anchor="middle" fill="#6e6e6e" font-size="9">[0][1]</text>
 
-  <rect x="435" y="135" width="110" height="38" rx="4" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="490" y="160" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">3</text>
-  <text x="490" y="183" text-anchor="middle" fill="#aaa" font-size="9">[0][2]</text>
+  <rect x="435" y="135" width="110" height="38" rx="4" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="490" y="160" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">3</text>
+  <text x="490" y="183" text-anchor="middle" fill="#6e6e6e" font-size="9">[0][2]</text>
 
   <!-- Row 1 label -->
-  <text x="160" y="220" text-anchor="end" fill="#dcdcaa" font-size="12" font-weight="bold">Row 1</text>
+  <text x="160" y="220" text-anchor="end" fill="#795e26" font-size="12" font-weight="bold">Row 1</text>
 
   <!-- Row 1 cells -->
-  <rect x="195" y="198" width="110" height="38" rx="4" fill="#2d2d2d" stroke="#dcdcaa" stroke-width="2"/>
-  <text x="250" y="222" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">4</text>
-  <text x="250" y="246" text-anchor="middle" fill="#aaa" font-size="9">[1][0]</text>
+  <rect x="195" y="198" width="110" height="38" rx="4" fill="#f3f3f3" stroke="#795e26" stroke-width="2"/>
+  <text x="250" y="222" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">4</text>
+  <text x="250" y="246" text-anchor="middle" fill="#6e6e6e" font-size="9">[1][0]</text>
 
-  <rect x="315" y="198" width="110" height="38" rx="4" fill="#2d2d2d" stroke="#dcdcaa" stroke-width="2"/>
-  <text x="370" y="222" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">5</text>
-  <text x="370" y="246" text-anchor="middle" fill="#aaa" font-size="9">[1][1]</text>
+  <rect x="315" y="198" width="110" height="38" rx="4" fill="#f3f3f3" stroke="#795e26" stroke-width="2"/>
+  <text x="370" y="222" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">5</text>
+  <text x="370" y="246" text-anchor="middle" fill="#6e6e6e" font-size="9">[1][1]</text>
 
-  <rect x="435" y="198" width="110" height="38" rx="4" fill="#2d2d2d" stroke="#dcdcaa" stroke-width="2"/>
-  <text x="490" y="222" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">6</text>
-  <text x="490" y="246" text-anchor="middle" fill="#aaa" font-size="9">[1][2]</text>
+  <rect x="435" y="198" width="110" height="38" rx="4" fill="#f3f3f3" stroke="#795e26" stroke-width="2"/>
+  <text x="490" y="222" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">6</text>
+  <text x="490" y="246" text-anchor="middle" fill="#6e6e6e" font-size="9">[1][2]</text>
 
   <!-- Brace / arrow to memory layout -->
-  <text x="430" y="280" text-anchor="middle" fill="#569cd6" font-size="14">↓  In memory, it's actually flat  ↓</text>
+  <text x="430" y="280" text-anchor="middle" fill="#0000ff" font-size="14">↓  In memory, it's actually flat  ↓</text>
 
   <!-- ============================================================ -->
   <!-- ACTUAL MEMORY LAYOUT: one contiguous block                   -->
   <!-- ============================================================ -->
-  <text x="30" y="320" fill="#4ec9b0" font-size="15" font-weight="bold">How it actually lives in memory: one contiguous block</text>
+  <text x="30" y="320" fill="#267f99" font-size="15" font-weight="bold">How it actually lives in memory: one contiguous block</text>
 
   <!-- Single contiguous block background -->
-  <rect x="95" y="338" width="670" height="52" rx="6" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
+  <rect x="95" y="338" width="670" height="52" rx="6" fill="#f3f3f3" stroke="#267f99" stroke-width="2"/>
 
   <!-- Row 0 cells in memory -->
-  <rect x="105" y="345" width="100" height="38" rx="4" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="155" y="369" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">1</text>
+  <rect x="105" y="345" width="100" height="38" rx="4" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="155" y="369" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">1</text>
 
-  <rect x="211" y="345" width="100" height="38" rx="4" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="261" y="369" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">2</text>
+  <rect x="211" y="345" width="100" height="38" rx="4" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="261" y="369" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">2</text>
 
-  <rect x="317" y="345" width="100" height="38" rx="4" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="367" y="369" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">3</text>
+  <rect x="317" y="345" width="100" height="38" rx="4" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="367" y="369" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">3</text>
 
   <!-- Row 1 cells in memory -->
-  <rect x="443" y="345" width="100" height="38" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="493" y="369" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">4</text>
+  <rect x="443" y="345" width="100" height="38" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="493" y="369" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">4</text>
 
-  <rect x="549" y="345" width="100" height="38" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="599" y="369" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">5</text>
+  <rect x="549" y="345" width="100" height="38" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="599" y="369" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">5</text>
 
-  <rect x="655" y="345" width="100" height="38" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="705" y="369" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">6</text>
+  <rect x="655" y="345" width="100" height="38" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="705" y="369" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">6</text>
 
   <!-- Row bracket labels under memory -->
-  <line x1="105" y1="392" x2="417" y2="392" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="261" y="406" text-anchor="middle" fill="#569cd6" font-size="10">Row 0</text>
+  <line x1="105" y1="392" x2="417" y2="392" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="261" y="406" text-anchor="middle" fill="#0000ff" font-size="10">Row 0</text>
 
-  <line x1="443" y1="392" x2="755" y2="392" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="599" y="406" text-anchor="middle" fill="#dcdcaa" font-size="10">Row 1</text>
+  <line x1="443" y1="392" x2="755" y2="392" stroke="#795e26" stroke-width="1.5"/>
+  <text x="599" y="406" text-anchor="middle" fill="#795e26" font-size="10">Row 1</text>
 
   <!-- Address index labels -->
-  <text x="155" y="420" text-anchor="middle" fill="#aaa" font-size="9">[0]</text>
-  <text x="261" y="420" text-anchor="middle" fill="#aaa" font-size="9">[1]</text>
-  <text x="367" y="420" text-anchor="middle" fill="#aaa" font-size="9">[2]</text>
-  <text x="493" y="420" text-anchor="middle" fill="#aaa" font-size="9">[3]</text>
-  <text x="599" y="420" text-anchor="middle" fill="#aaa" font-size="9">[4]</text>
-  <text x="705" y="420" text-anchor="middle" fill="#aaa" font-size="9">[5]</text>
+  <text x="155" y="420" text-anchor="middle" fill="#6e6e6e" font-size="9">[0]</text>
+  <text x="261" y="420" text-anchor="middle" fill="#6e6e6e" font-size="9">[1]</text>
+  <text x="367" y="420" text-anchor="middle" fill="#6e6e6e" font-size="9">[2]</text>
+  <text x="493" y="420" text-anchor="middle" fill="#6e6e6e" font-size="9">[3]</text>
+  <text x="599" y="420" text-anchor="middle" fill="#6e6e6e" font-size="9">[4]</text>
+  <text x="705" y="420" text-anchor="middle" fill="#6e6e6e" font-size="9">[5]</text>
 
   <!-- Index formula callout -->
-  <rect x="95" y="435" width="480" height="28" rx="4" fill="#4ec9b015" stroke="#4ec9b0" stroke-width="1" stroke-dasharray="4,2"/>
-  <text x="105" y="454" fill="#4ec9b0" font-size="12">grid[<tspan fill="#dcdcaa">1</tspan>][<tspan fill="#dcdcaa">2</tspan>]  →  row 1 starts at index 3 → 3 + 2 = index <tspan fill="#b5cea8" font-weight="bold">5</tspan>  →  value <tspan fill="#b5cea8" font-weight="bold">6</tspan></text>
+  <rect x="95" y="435" width="480" height="28" rx="4" fill="#267f9915" stroke="#267f99" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="105" y="454" fill="#267f99" font-size="12">grid[<tspan fill="#795e26">1</tspan>][<tspan fill="#795e26">2</tspan>]  →  row 1 starts at index 3 → 3 + 2 = index <tspan fill="#098658" font-weight="bold">5</tspan>  →  value <tspan fill="#098658" font-weight="bold">6</tspan></text>
 
   <!-- Key insight callout -->
-  <rect x="600" y="430" width="230" height="40" rx="6" fill="#569cd615" stroke="#569cd6" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="610" y="448" fill="#569cd6" font-size="11" font-weight="bold">Row-major order:</text>
-  <text x="610" y="463" fill="#d4d4d4" font-size="10">Row 0, then Row 1, back to back</text>
+  <rect x="600" y="430" width="230" height="40" rx="6" fill="#0000ff15" stroke="#0000ff" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="610" y="448" fill="#0000ff" font-size="11" font-weight="bold">Row-major order:</text>
+  <text x="610" y="463" fill="#2c3e50" font-size="10">Row 0, then Row 1, back to back</text>
 </svg>

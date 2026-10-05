@@ -1,100 +1,100 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 530" font-family="Consolas, 'Courier New', monospace" font-size="14">
   <defs>
     <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#569cd6"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0000ff"/>
     </marker>
     <marker id="arrow-gray" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#555"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#555555"/>
     </marker>
     <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4ec9b0"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#267f99"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="820" height="530" fill="#1e1e1e" rx="8"/>
+  <rect width="820" height="530" fill="#ffffff" rx="8"/>
 
   <!-- Title -->
-  <text x="410" y="35" text-anchor="middle" fill="#569cd6" font-size="18" font-weight="bold">unique_ptr — Exclusive Ownership with Automatic Cleanup</text>
+  <text x="410" y="35" text-anchor="middle" fill="#0000ff" font-size="18" font-weight="bold">unique_ptr — Exclusive Ownership with Automatic Cleanup</text>
 
   <!-- ============ TOP: How it works ============ -->
-  <text x="30" y="72" fill="#6a9955" font-size="15" font-weight="bold">Creating a unique_ptr — two ways:</text>
+  <text x="30" y="72" fill="#008000" font-size="15" font-weight="bold">Creating a unique_ptr — two ways:</text>
 
   <!-- Creation comparison box -->
-  <rect x="30" y="82" width="530" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
-  <text x="45" y="102" fill="#28a745" font-size="12">auto smartValue = <tspan fill="#4ec9b0" font-weight="bold">std::make_unique&lt;int&gt;</tspan>(99);          <tspan fill="#6a9955">// ✓ Preferred</tspan></text>
-  <text x="45" y="122" fill="#d7ba7d" font-size="12">std::unique_ptr&lt;int&gt; ptr(<tspan fill="#ce9178">new int(99)</tspan>);          <tspan fill="#d7ba7daa">// ✕ works, but avoid</tspan></text>
+  <rect x="30" y="82" width="530" height="55" rx="4" fill="#f3f3f3" stroke="#555555" stroke-width="1"/>
+  <text x="45" y="102" fill="#1c7e45" font-size="12">auto smartValue = <tspan fill="#267f99" font-weight="bold">std::make_unique&lt;int&gt;</tspan>(99);          <tspan fill="#008000">// ✓ Preferred</tspan></text>
+  <text x="45" y="122" fill="#8f3a00" font-size="12">std::unique_ptr&lt;int&gt; ptr(<tspan fill="#a31515">new int(99)</tspan>);          <tspan fill="#8f3a00aa">// ✕ works, but avoid</tspan></text>
 
   <!-- make_unique callout box -->
-  <rect x="580" y="82" width="210" height="55" rx="6" fill="#4ec9b015" stroke="#4ec9b0" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="590" y="100" fill="#4ec9b0" font-size="11" font-weight="bold">Why prefer make_unique?</text>
-  <text x="590" y="114" fill="#d4d4d4" font-size="10">• Exception-safe</text>
-  <text x="590" y="128" fill="#d4d4d4" font-size="10">• No raw <tspan fill="#ce9178">new</tspan> in your code</text>
+  <rect x="580" y="82" width="210" height="55" rx="6" fill="#267f9915" stroke="#267f99" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="590" y="100" fill="#267f99" font-size="11" font-weight="bold">Why prefer make_unique?</text>
+  <text x="590" y="114" fill="#2c3e50" font-size="10">• Exception-safe</text>
+  <text x="590" y="128" fill="#2c3e50" font-size="10">• No raw <tspan fill="#a31515">new</tspan> in your code</text>
 
   <!-- unique_ptr wrapper box -->
-  <rect x="30" y="152" width="250" height="80" rx="6" fill="#2d2d2d" stroke="#c586c0" stroke-width="2"/>
-  <text x="40" y="170" fill="#c586c0" font-size="11" font-weight="bold">unique_ptr&lt;int&gt;</text>
-  <text x="230" y="170" fill="#c586c0" font-size="10">STACK</text>
+  <rect x="30" y="152" width="250" height="80" rx="6" fill="#f3f3f3" stroke="#af00db" stroke-width="2"/>
+  <text x="40" y="170" fill="#af00db" font-size="11" font-weight="bold">unique_ptr&lt;int&gt;</text>
+  <text x="230" y="170" fill="#af00db" font-size="10">STACK</text>
 
   <!-- Inner raw pointer -->
-  <rect x="45" y="179" width="220" height="40" rx="4" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="55" y="199" fill="#9cdcfe" font-size="12">smartValue</text>
-  <text x="55" y="214" fill="#ce9178" font-size="10">internal raw ptr → 0x7A00</text>
+  <rect x="45" y="179" width="220" height="40" rx="4" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="55" y="199" fill="#001080" font-size="12">smartValue</text>
+  <text x="55" y="214" fill="#a31515" font-size="10">internal raw ptr → 0x7A00</text>
 
   <!-- Arrow to heap -->
-  <line x1="280" y1="199" x2="370" y2="199" stroke="#569cd6" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="280" y1="199" x2="370" y2="199" stroke="#0000ff" stroke-width="2" marker-end="url(#arrow)"/>
 
   <!-- Heap value -->
-  <rect x="380" y="174" width="100" height="50" rx="4" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
-  <text x="430" y="197" text-anchor="middle" fill="#b5cea8" font-size="16" font-weight="bold">99</text>
-  <text x="430" y="216" text-anchor="middle" fill="#ce9178" font-size="10">0x7A00</text>
-  <text x="430" y="169" fill="#4ec9b0" font-size="10" text-anchor="middle">HEAP</text>
+  <rect x="380" y="174" width="100" height="50" rx="4" fill="#f3f3f3" stroke="#267f99" stroke-width="2"/>
+  <text x="430" y="197" text-anchor="middle" fill="#098658" font-size="16" font-weight="bold">99</text>
+  <text x="430" y="216" text-anchor="middle" fill="#a31515" font-size="10">0x7A00</text>
+  <text x="430" y="169" fill="#267f99" font-size="10" text-anchor="middle">HEAP</text>
 
   <!-- Ownership badge -->
-  <rect x="520" y="179" width="270" height="38" rx="15" fill="#c586c022" stroke="#c586c0" stroke-width="1.5"/>
-  <text x="655" y="202" text-anchor="middle" fill="#c586c0" font-size="12" font-weight="bold">ONE owner only</text>
+  <rect x="520" y="179" width="270" height="38" rx="15" fill="#af00db22" stroke="#af00db" stroke-width="1.5"/>
+  <text x="655" y="202" text-anchor="middle" fill="#af00db" font-size="12" font-weight="bold">ONE owner only</text>
 
   <!-- ============ MIDDLE: No copies allowed ============ -->
-  <text x="30" y="268" fill="#d7ba7d" font-size="15" font-weight="bold">No copies allowed — ownership is exclusive:</text>
+  <text x="30" y="268" fill="#8f3a00" font-size="15" font-weight="bold">No copies allowed — ownership is exclusive:</text>
 
   <!-- Code examples -->
-  <rect x="30" y="281" width="440" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
-  <text x="45" y="301" fill="#dc3545" font-size="12">auto copy = smartValue;           <tspan fill="#dc354599">// ✕ COMPILE ERROR</tspan></text>
-  <text x="45" y="321" fill="#28a745" font-size="12">auto moved = std::move(smartValue); <tspan fill="#6a9955">// ✓ Transfer ownership</tspan></text>
+  <rect x="30" y="281" width="440" height="55" rx="4" fill="#f3f3f3" stroke="#555555" stroke-width="1"/>
+  <text x="45" y="301" fill="#c0392b" font-size="12">auto copy = smartValue;           <tspan fill="#c0392b99">// ✕ COMPILE ERROR</tspan></text>
+  <text x="45" y="321" fill="#1c7e45" font-size="12">auto moved = std::move(smartValue); <tspan fill="#008000">// ✓ Transfer ownership</tspan></text>
 
   <!-- Move arrow diagram -->
-  <rect x="490" y="281" width="120" height="55" rx="4" fill="#2d2d2d" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="500" y="300" fill="#9cdcfe" font-size="11">smartValue</text>
-  <text x="500" y="316" fill="#9da5b4" font-size="10">nullptr (empty)</text>
+  <rect x="490" y="281" width="120" height="55" rx="4" fill="#f3f3f3" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="500" y="300" fill="#001080" font-size="11">smartValue</text>
+  <text x="500" y="316" fill="#6e6e6e" font-size="10">nullptr (empty)</text>
 
-  <text x="620" y="308" fill="#569cd6" font-size="16">→</text>
+  <text x="620" y="308" fill="#0000ff" font-size="16">→</text>
 
-  <rect x="645" y="281" width="145" height="55" rx="4" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="655" y="300" fill="#9cdcfe" font-size="11">moved</text>
-  <text x="655" y="316" fill="#4ec9b0" font-size="10">owns the 99</text>
+  <rect x="645" y="281" width="145" height="55" rx="4" fill="#f3f3f3" stroke="#267f99" stroke-width="1.5"/>
+  <text x="655" y="300" fill="#001080" font-size="11">moved</text>
+  <text x="655" y="316" fill="#267f99" font-size="10">owns the 99</text>
 
   <!-- ============ BOTTOM: Automatic cleanup ============ -->
-  <text x="30" y="373" fill="#4ec9b0" font-size="15" font-weight="bold">Automatic cleanup — when unique_ptr goes out of scope:</text>
+  <text x="30" y="373" fill="#267f99" font-size="15" font-weight="bold">Automatic cleanup — when unique_ptr goes out of scope:</text>
 
   <!-- Scope block -->
-  <rect x="30" y="388" width="760" height="115" rx="6" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
+  <rect x="30" y="388" width="760" height="115" rx="6" fill="#f3f3f3" stroke="#555555" stroke-width="1"/>
 
   <!-- Step 1: in scope -->
-  <text x="50" y="410" fill="#608b4e" font-size="12">while in scope:</text>
-  <rect x="50" y="418" width="170" height="35" rx="4" fill="#1e1e1e" stroke="#c586c0" stroke-width="1.5"/>
-  <text x="60" y="441" fill="#c586c0" font-size="11">unique_ptr → 99</text>
+  <text x="50" y="410" fill="#008000" font-size="12">while in scope:</text>
+  <rect x="50" y="418" width="170" height="35" rx="4" fill="#ffffff" stroke="#af00db" stroke-width="1.5"/>
+  <text x="60" y="441" fill="#af00db" font-size="11">unique_ptr → 99</text>
 
-  <text x="240" y="440" fill="#6a9955" font-size="12">✓ pointer is valid, memory is owned</text>
+  <text x="240" y="440" fill="#008000" font-size="12">✓ pointer is valid, memory is owned</text>
 
   <!-- Step 2: scope ends -->
-  <text x="50" y="473" fill="#d7ba7d" font-size="12">} // scope ends →</text>
-  <rect x="210" y="461" width="220" height="35" rx="4" fill="#1e1e1e" stroke="#888" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="220" y="483" fill="#9da5b4" font-size="11">~unique_ptr() calls <tspan fill="#dc3545">delete</tspan></text>
+  <text x="50" y="473" fill="#8f3a00" font-size="12">} // scope ends →</text>
+  <rect x="210" y="461" width="220" height="35" rx="4" fill="#ffffff" stroke="#6e6e6e" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="220" y="483" fill="#6e6e6e" font-size="11">~unique_ptr() calls <tspan fill="#c0392b">delete</tspan></text>
 
-  <text x="450" y="483" fill="#569cd6" font-size="14">→</text>
+  <text x="450" y="483" fill="#0000ff" font-size="14">→</text>
 
-  <rect x="475" y="461" width="160" height="35" rx="15" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
-  <text x="555" y="483" text-anchor="middle" fill="#28a745" font-size="12" font-weight="bold">✓ Memory freed!</text>
+  <rect x="475" y="461" width="160" height="35" rx="15" fill="#1c7e4522" stroke="#1c7e45" stroke-width="1.5"/>
+  <text x="555" y="483" text-anchor="middle" fill="#1c7e45" font-size="12" font-weight="bold">✓ Memory freed!</text>
 
-  <text x="650" y="483" fill="#6a9955" font-size="11">No leak possible</text>
+  <text x="650" y="483" fill="#008000" font-size="11">No leak possible</text>
 </svg>

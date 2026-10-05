@@ -1,132 +1,132 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" font-family="Consolas, 'Courier New', monospace" font-size="14">
   <defs>
     <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#28a745"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1c7e45"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="860" height="420" fill="#1e1e1e" rx="8"/>
+  <rect width="860" height="420" fill="#ffffff" rx="8"/>
 
   <!-- Title -->
-  <text x="430" y="35" text-anchor="middle" fill="#28a745" font-size="18" font-weight="bold">Flat Array as 2D — One Contiguous Block</text>
-  <text x="430" y="58" text-anchor="middle" fill="#608b4e" font-size="12">int* flat = new int[rows * cols];   // 3 * 4 = 12 ints</text>
+  <text x="430" y="35" text-anchor="middle" fill="#1c7e45" font-size="18" font-weight="bold">Flat Array as 2D — One Contiguous Block</text>
+  <text x="430" y="58" text-anchor="middle" fill="#008000" font-size="12">int* flat = new int[rows * cols];   // 3 * 4 = 12 ints</text>
 
   <!-- STACK label -->
-  <text x="30" y="100" fill="#569cd6" font-size="11" font-weight="bold">STACK</text>
-  <line x1="30" y1="104" x2="150" y2="104" stroke="#569cd6" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="30" y="100" fill="#0000ff" font-size="11" font-weight="bold">STACK</text>
+  <line x1="30" y1="104" x2="150" y2="104" stroke="#0000ff" stroke-width="1" stroke-dasharray="3,2"/>
 
   <!-- HEAP label -->
-  <text x="200" y="100" fill="#4ec9b0" font-size="11" font-weight="bold">HEAP</text>
-  <line x1="200" y1="104" x2="830" y2="104" stroke="#4ec9b0" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="200" y="100" fill="#267f99" font-size="11" font-weight="bold">HEAP</text>
+  <line x1="200" y1="104" x2="830" y2="104" stroke="#267f99" stroke-width="1" stroke-dasharray="3,2"/>
 
   <!-- flat variable on stack -->
-  <rect x="30" y="120" width="120" height="50" rx="6" fill="#2d2d2d" stroke="#28a745" stroke-width="2"/>
-  <text x="90" y="141" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">int*</text>
-  <text x="90" y="160" text-anchor="middle" fill="#9cdcfe" font-size="13">flat</text>
+  <rect x="30" y="120" width="120" height="50" rx="6" fill="#f3f3f3" stroke="#1c7e45" stroke-width="2"/>
+  <text x="90" y="141" text-anchor="middle" fill="#1c7e45" font-size="11" font-weight="bold">int*</text>
+  <text x="90" y="160" text-anchor="middle" fill="#001080" font-size="13">flat</text>
 
   <!-- Arrow from flat to heap block -->
-  <line x1="150" y1="145" x2="210" y2="145" stroke="#28a745" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <line x1="150" y1="145" x2="210" y2="145" stroke="#1c7e45" stroke-width="2" marker-end="url(#arrow-green)"/>
 
   <!-- Single flat array block -->
-  <rect x="222" y="120" width="600" height="50" rx="4" fill="#2d2d2d" stroke="#28a745" stroke-width="2"/>
+  <rect x="222" y="120" width="600" height="50" rx="4" fill="#f3f3f3" stroke="#1c7e45" stroke-width="2"/>
 
   <!-- Row 0 values (blue borders) -->
-  <rect x="232" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="254" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">1</text>
+  <rect x="232" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="254" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">1</text>
 
-  <rect x="280" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="302" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">2</text>
+  <rect x="280" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="302" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">2</text>
 
-  <rect x="328" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="350" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">3</text>
+  <rect x="328" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="350" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">3</text>
 
-  <rect x="376" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="398" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">4</text>
+  <rect x="376" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="398" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">4</text>
 
   <!-- Row 1 values (amber borders) -->
-  <rect x="428" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="450" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">5</text>
+  <rect x="428" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="450" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">5</text>
 
-  <rect x="476" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="498" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">6</text>
+  <rect x="476" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="498" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">6</text>
 
-  <rect x="524" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="546" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">7</text>
+  <rect x="524" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="546" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">7</text>
 
-  <rect x="572" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="594" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">8</text>
+  <rect x="572" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="594" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">8</text>
 
   <!-- Row 2 values (green borders) -->
-  <rect x="624" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="646" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">9</text>
+  <rect x="624" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#267f99" stroke-width="1.5"/>
+  <text x="646" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">9</text>
 
-  <rect x="672" y="128" width="48" height="34" rx="3" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="696" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">10</text>
+  <rect x="672" y="128" width="48" height="34" rx="3" fill="#ffffff" stroke="#267f99" stroke-width="1.5"/>
+  <text x="696" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">10</text>
 
-  <rect x="724" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="746" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">11</text>
+  <rect x="724" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#267f99" stroke-width="1.5"/>
+  <text x="746" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">11</text>
 
-  <rect x="772" y="128" width="44" height="34" rx="3" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="794" y="150" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">12</text>
+  <rect x="772" y="128" width="44" height="34" rx="3" fill="#ffffff" stroke="#267f99" stroke-width="1.5"/>
+  <text x="794" y="150" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">12</text>
 
   <!-- Flat indices -->
-  <text x="254" y="182" text-anchor="middle" fill="#aaa" font-size="9">[0]</text>
-  <text x="302" y="182" text-anchor="middle" fill="#aaa" font-size="9">[1]</text>
-  <text x="350" y="182" text-anchor="middle" fill="#aaa" font-size="9">[2]</text>
-  <text x="398" y="182" text-anchor="middle" fill="#aaa" font-size="9">[3]</text>
-  <text x="450" y="182" text-anchor="middle" fill="#aaa" font-size="9">[4]</text>
-  <text x="498" y="182" text-anchor="middle" fill="#aaa" font-size="9">[5]</text>
-  <text x="546" y="182" text-anchor="middle" fill="#aaa" font-size="9">[6]</text>
-  <text x="594" y="182" text-anchor="middle" fill="#aaa" font-size="9">[7]</text>
-  <text x="646" y="182" text-anchor="middle" fill="#aaa" font-size="9">[8]</text>
-  <text x="696" y="182" text-anchor="middle" fill="#aaa" font-size="9">[9]</text>
-  <text x="746" y="182" text-anchor="middle" fill="#aaa" font-size="9">[10]</text>
-  <text x="794" y="182" text-anchor="middle" fill="#aaa" font-size="9">[11]</text>
+  <text x="254" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[0]</text>
+  <text x="302" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[1]</text>
+  <text x="350" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[2]</text>
+  <text x="398" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[3]</text>
+  <text x="450" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[4]</text>
+  <text x="498" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[5]</text>
+  <text x="546" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[6]</text>
+  <text x="594" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[7]</text>
+  <text x="646" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[8]</text>
+  <text x="696" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[9]</text>
+  <text x="746" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[10]</text>
+  <text x="794" y="182" text-anchor="middle" fill="#6e6e6e" font-size="9">[11]</text>
 
   <!-- Row bracket labels -->
-  <line x1="232" y1="192" x2="420" y2="192" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="326" y="206" text-anchor="middle" fill="#569cd6" font-size="10">Row 0</text>
+  <line x1="232" y1="192" x2="420" y2="192" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="326" y="206" text-anchor="middle" fill="#0000ff" font-size="10">Row 0</text>
 
-  <line x1="428" y1="192" x2="616" y2="192" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="522" y="206" text-anchor="middle" fill="#dcdcaa" font-size="10">Row 1</text>
+  <line x1="428" y1="192" x2="616" y2="192" stroke="#795e26" stroke-width="1.5"/>
+  <text x="522" y="206" text-anchor="middle" fill="#795e26" font-size="10">Row 1</text>
 
-  <line x1="624" y1="192" x2="816" y2="192" stroke="#4ec9b0" stroke-width="1.5"/>
-  <text x="720" y="206" text-anchor="middle" fill="#4ec9b0" font-size="10">Row 2</text>
+  <line x1="624" y1="192" x2="816" y2="192" stroke="#267f99" stroke-width="1.5"/>
+  <text x="720" y="206" text-anchor="middle" fill="#267f99" font-size="10">Row 2</text>
 
   <!-- ============================================================ -->
   <!-- INDEX FORMULA                                                -->
   <!-- ============================================================ -->
-  <text x="30" y="245" fill="#c586c0" font-size="15" font-weight="bold">The index formula: flat[r * cols + c]</text>
+  <text x="30" y="245" fill="#af00db" font-size="15" font-weight="bold">The index formula: flat[r * cols + c]</text>
 
   <!-- Worked example -->
-  <rect x="30" y="260" width="500" height="70" rx="6" fill="#2d2d2d" stroke="#c586c0" stroke-width="1.5"/>
-  <text x="45" y="282" fill="#d4d4d4" font-size="12">To access row <tspan fill="#dcdcaa" font-weight="bold">1</tspan>, column <tspan fill="#dcdcaa" font-weight="bold">2</tspan>:</text>
-  <text x="45" y="302" fill="#d7ba7d" font-size="13">flat[<tspan fill="#dcdcaa">1</tspan> * <tspan fill="#9cdcfe">4</tspan> + <tspan fill="#dcdcaa">2</tspan>]  =  flat[<tspan fill="#b5cea8" font-weight="bold">6</tspan>]  =  <tspan fill="#b5cea8" font-weight="bold">7</tspan></text>
-  <text x="45" y="322" fill="#aaa" font-size="10">      r   cols   c          index     value</text>
+  <rect x="30" y="260" width="500" height="70" rx="6" fill="#f3f3f3" stroke="#af00db" stroke-width="1.5"/>
+  <text x="45" y="282" fill="#2c3e50" font-size="12">To access row <tspan fill="#795e26" font-weight="bold">1</tspan>, column <tspan fill="#795e26" font-weight="bold">2</tspan>:</text>
+  <text x="45" y="302" fill="#8f3a00" font-size="13">flat[<tspan fill="#795e26">1</tspan> * <tspan fill="#001080">4</tspan> + <tspan fill="#795e26">2</tspan>]  =  flat[<tspan fill="#098658" font-weight="bold">6</tspan>]  =  <tspan fill="#098658" font-weight="bold">7</tspan></text>
+  <text x="45" y="322" fill="#6e6e6e" font-size="10">      r   cols   c          index     value</text>
 
   <!-- Visual highlight: draw a box around flat[6] in the array above -->
-  <rect x="524" y="126" width="44" height="38" rx="3" fill="none" stroke="#c586c0" stroke-width="2.5" stroke-dasharray="4,2"/>
-  <line x1="546" y1="164" x2="546" y2="260" stroke="#c586c0" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="524" y="126" width="44" height="38" rx="3" fill="none" stroke="#af00db" stroke-width="2.5" stroke-dasharray="4,2"/>
+  <line x1="546" y1="164" x2="546" y2="260" stroke="#af00db" stroke-width="1" stroke-dasharray="3,2"/>
 
   <!-- ============================================================ -->
   <!-- COMPARISON CALLOUT                                           -->
   <!-- ============================================================ -->
-  <rect x="555" y="248" width="275" height="100" rx="6" fill="#28a74515" stroke="#28a745" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="565" y="268" fill="#28a745" font-size="12" font-weight="bold">✓ Why flat is usually better:</text>
-  <text x="565" y="288" fill="#d4d4d4" font-size="11">• 1 new, 1 delete[]</text>
-  <text x="565" y="306" fill="#d4d4d4" font-size="11">• All data side by side (cache-friendly)</text>
-  <text x="565" y="324" fill="#d4d4d4" font-size="11">• No pointer chasing</text>
-  <text x="565" y="342" fill="#d4d4d4" font-size="11">• No risk of leaking individual rows</text>
+  <rect x="555" y="248" width="275" height="100" rx="6" fill="#1c7e4515" stroke="#1c7e45" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="565" y="268" fill="#1c7e45" font-size="12" font-weight="bold">✓ Why flat is usually better:</text>
+  <text x="565" y="288" fill="#2c3e50" font-size="11">• 1 new, 1 delete[]</text>
+  <text x="565" y="306" fill="#2c3e50" font-size="11">• All data side by side (cache-friendly)</text>
+  <text x="565" y="324" fill="#2c3e50" font-size="11">• No pointer chasing</text>
+  <text x="565" y="342" fill="#2c3e50" font-size="11">• No risk of leaking individual rows</text>
 
   <!-- Cleanup comparison -->
-  <rect x="30" y="355" width="250" height="55" rx="4" fill="#2d2d2d" stroke="#dc3545" stroke-width="1.5"/>
-  <text x="40" y="374" fill="#dc3545" font-size="11" font-weight="bold">int** pointer-to-pointer:</text>
-  <text x="40" y="394" fill="#d4d4d4" font-size="11">4 allocations → 4 delete[]</text>
+  <rect x="30" y="355" width="250" height="55" rx="4" fill="#f3f3f3" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="40" y="374" fill="#c0392b" font-size="11" font-weight="bold">int** pointer-to-pointer:</text>
+  <text x="40" y="394" fill="#2c3e50" font-size="11">4 allocations → 4 delete[]</text>
 
-  <text x="295" y="385" fill="#569cd6" font-size="14">vs</text>
+  <text x="295" y="385" fill="#0000ff" font-size="14">vs</text>
 
-  <rect x="320" y="355" width="210" height="55" rx="4" fill="#2d2d2d" stroke="#28a745" stroke-width="1.5"/>
-  <text x="330" y="374" fill="#28a745" font-size="11" font-weight="bold">int* flat:</text>
-  <text x="330" y="394" fill="#d4d4d4" font-size="11">1 allocation → 1 delete[]</text>
+  <rect x="320" y="355" width="210" height="55" rx="4" fill="#f3f3f3" stroke="#1c7e45" stroke-width="1.5"/>
+  <text x="330" y="374" fill="#1c7e45" font-size="11" font-weight="bold">int* flat:</text>
+  <text x="330" y="394" fill="#2c3e50" font-size="11">1 allocation → 1 delete[]</text>
 </svg>

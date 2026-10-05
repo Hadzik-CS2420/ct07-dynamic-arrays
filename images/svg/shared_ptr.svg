@@ -1,135 +1,135 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 630" font-family="Consolas, 'Courier New', monospace" font-size="14">
   <defs>
     <marker id="arrow-a" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#569cd6"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0000ff"/>
     </marker>
     <marker id="arrow-b" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#dcdcaa"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#795e26"/>
     </marker>
     <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-      <polygon points="0 0, 10 3.5, 0 7" fill="#4ec9b0"/>
+      <polygon points="0 0, 10 3.5, 0 7" fill="#267f99"/>
     </marker>
   </defs>
 
   <!-- Background -->
-  <rect width="820" height="630" fill="#1e1e1e" rx="8"/>
+  <rect width="820" height="630" fill="#ffffff" rx="8"/>
 
   <!-- Title -->
-  <text x="410" y="35" text-anchor="middle" fill="#569cd6" font-size="18" font-weight="bold">shared_ptr — Shared Ownership with Reference Counting</text>
+  <text x="410" y="35" text-anchor="middle" fill="#0000ff" font-size="18" font-weight="bold">shared_ptr — Shared Ownership with Reference Counting</text>
 
   <!-- ============ STEP 1: One owner ============ -->
-  <text x="30" y="72" fill="#6a9955" font-size="15" font-weight="bold">Step 1: Create a shared_ptr</text>
+  <text x="30" y="72" fill="#008000" font-size="15" font-weight="bold">Step 1: Create a shared_ptr</text>
 
   <!-- Creation comparison box -->
-  <rect x="30" y="82" width="530" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
-  <text x="45" y="102" fill="#28a745" font-size="12">auto sharedA = <tspan fill="#4ec9b0" font-weight="bold">std::make_shared&lt;int&gt;</tspan>(77);            <tspan fill="#6a9955">// ✓ Preferred</tspan></text>
-  <text x="45" y="122" fill="#d7ba7d" font-size="12">std::shared_ptr&lt;int&gt; ptr(<tspan fill="#ce9178">new int(77)</tspan>);          <tspan fill="#d7ba7daa">// ✕ works, but avoid</tspan></text>
+  <rect x="30" y="82" width="530" height="55" rx="4" fill="#f3f3f3" stroke="#555555" stroke-width="1"/>
+  <text x="45" y="102" fill="#1c7e45" font-size="12">auto sharedA = <tspan fill="#267f99" font-weight="bold">std::make_shared&lt;int&gt;</tspan>(77);            <tspan fill="#008000">// ✓ Preferred</tspan></text>
+  <text x="45" y="122" fill="#8f3a00" font-size="12">std::shared_ptr&lt;int&gt; ptr(<tspan fill="#a31515">new int(77)</tspan>);          <tspan fill="#8f3a00aa">// ✕ works, but avoid</tspan></text>
 
   <!-- make_shared callout box -->
-  <rect x="580" y="82" width="210" height="55" rx="6" fill="#4ec9b015" stroke="#4ec9b0" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="590" y="100" fill="#4ec9b0" font-size="11" font-weight="bold">Why prefer make_shared?</text>
-  <text x="590" y="114" fill="#d4d4d4" font-size="10">• Single allocation (faster)</text>
-  <text x="590" y="128" fill="#d4d4d4" font-size="10">• No raw <tspan fill="#ce9178">new</tspan> in your code</text>
+  <rect x="580" y="82" width="210" height="55" rx="6" fill="#267f9915" stroke="#267f99" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="590" y="100" fill="#267f99" font-size="11" font-weight="bold">Why prefer make_shared?</text>
+  <text x="590" y="114" fill="#2c3e50" font-size="10">• Single allocation (faster)</text>
+  <text x="590" y="128" fill="#2c3e50" font-size="10">• No raw <tspan fill="#a31515">new</tspan> in your code</text>
 
   <!-- sharedA box -->
-  <rect x="30" y="155" width="200" height="60" rx="6" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="40" y="175" fill="#569cd6" font-size="11" font-weight="bold">shared_ptr</text>
-  <text x="40" y="195" fill="#9cdcfe" font-size="13">sharedA</text>
-  <text x="180" y="175" fill="#569cd6" font-size="10">STACK</text>
+  <rect x="30" y="155" width="200" height="60" rx="6" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="40" y="175" fill="#0000ff" font-size="11" font-weight="bold">shared_ptr</text>
+  <text x="40" y="195" fill="#001080" font-size="13">sharedA</text>
+  <text x="180" y="175" fill="#0000ff" font-size="10">STACK</text>
 
   <!-- Arrow to heap -->
-  <line x1="230" y1="185" x2="330" y2="185" stroke="#569cd6" stroke-width="2" marker-end="url(#arrow-a)"/>
+  <line x1="230" y1="185" x2="330" y2="185" stroke="#0000ff" stroke-width="2" marker-end="url(#arrow-a)"/>
 
   <!-- Heap value + control block -->
-  <rect x="330" y="150" width="220" height="70" rx="6" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
-  <text x="440" y="168" text-anchor="middle" fill="#4ec9b0" font-size="10">HEAP</text>
+  <rect x="330" y="150" width="220" height="70" rx="6" fill="#f3f3f3" stroke="#267f99" stroke-width="2"/>
+  <text x="440" y="168" text-anchor="middle" fill="#267f99" font-size="10">HEAP</text>
 
   <!-- Value cell -->
-  <rect x="345" y="175" width="80" height="35" rx="4" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1"/>
-  <text x="385" y="192" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">77</text>
-  <text x="385" y="206" text-anchor="middle" fill="#ce9178" font-size="9">value</text>
+  <rect x="345" y="175" width="80" height="35" rx="4" fill="#ffffff" stroke="#267f99" stroke-width="1"/>
+  <text x="385" y="192" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">77</text>
+  <text x="385" y="206" text-anchor="middle" fill="#a31515" font-size="9">value</text>
 
   <!-- Ref count cell -->
-  <rect x="440" y="175" width="95" height="35" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1"/>
-  <text x="487" y="192" text-anchor="middle" fill="#dcdcaa" font-size="14" font-weight="bold">count: 1</text>
-  <text x="487" y="206" text-anchor="middle" fill="#ce9178" font-size="9">ref count</text>
+  <rect x="440" y="175" width="95" height="35" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1"/>
+  <text x="487" y="192" text-anchor="middle" fill="#795e26" font-size="14" font-weight="bold">count: 1</text>
+  <text x="487" y="206" text-anchor="middle" fill="#a31515" font-size="9">ref count</text>
 
   <!-- Status -->
-  <rect x="590" y="165" width="190" height="38" rx="15" fill="#569cd622" stroke="#569cd6" stroke-width="1.5"/>
-  <text x="685" y="189" text-anchor="middle" fill="#569cd6" font-size="12" font-weight="bold">1 owner → count = 1</text>
+  <rect x="590" y="165" width="190" height="38" rx="15" fill="#0000ff22" stroke="#0000ff" stroke-width="1.5"/>
+  <text x="685" y="189" text-anchor="middle" fill="#0000ff" font-size="12" font-weight="bold">1 owner → count = 1</text>
 
   <!-- ============ STEP 2: Copy — two owners ============ -->
-  <text x="30" y="255" fill="#d7ba7d" font-size="15" font-weight="bold">Step 2: Copy the shared_ptr</text>
-  <text x="30" y="275" fill="#608b4e" font-size="12">auto sharedB = sharedA;    // count goes UP</text>
+  <text x="30" y="255" fill="#8f3a00" font-size="15" font-weight="bold">Step 2: Copy the shared_ptr</text>
+  <text x="30" y="275" fill="#008000" font-size="12">auto sharedB = sharedA;    // count goes UP</text>
 
   <!-- sharedA box -->
-  <rect x="30" y="290" width="200" height="60" rx="6" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="40" y="310" fill="#569cd6" font-size="11" font-weight="bold">shared_ptr</text>
-  <text x="40" y="330" fill="#9cdcfe" font-size="13">sharedA</text>
+  <rect x="30" y="290" width="200" height="60" rx="6" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="40" y="310" fill="#0000ff" font-size="11" font-weight="bold">shared_ptr</text>
+  <text x="40" y="330" fill="#001080" font-size="13">sharedA</text>
 
   <!-- sharedB box -->
-  <rect x="30" y="360" width="200" height="60" rx="6" fill="#2d2d2d" stroke="#dcdcaa" stroke-width="2"/>
-  <text x="40" y="380" fill="#dcdcaa" font-size="11" font-weight="bold">shared_ptr</text>
-  <text x="40" y="400" fill="#9cdcfe" font-size="13">sharedB</text>
+  <rect x="30" y="360" width="200" height="60" rx="6" fill="#f3f3f3" stroke="#795e26" stroke-width="2"/>
+  <text x="40" y="380" fill="#795e26" font-size="11" font-weight="bold">shared_ptr</text>
+  <text x="40" y="400" fill="#001080" font-size="13">sharedB</text>
 
   <!-- Both arrows to same heap -->
-  <line x1="230" y1="320" x2="320" y2="320" stroke="#569cd6" stroke-width="2" marker-end="url(#arrow-a)"/>
-  <line x1="230" y1="390" x2="320" y2="390" stroke="#dcdcaa" stroke-width="2" marker-end="url(#arrow-b)"/>
+  <line x1="230" y1="320" x2="320" y2="320" stroke="#0000ff" stroke-width="2" marker-end="url(#arrow-a)"/>
+  <line x1="230" y1="390" x2="320" y2="390" stroke="#795e26" stroke-width="2" marker-end="url(#arrow-b)"/>
 
   <!-- Converge arrows to single block -->
-  <line x1="320" y1="320" x2="340" y2="350" stroke="#569cd6" stroke-width="2"/>
-  <line x1="320" y1="390" x2="340" y2="360" stroke="#dcdcaa" stroke-width="2"/>
+  <line x1="320" y1="320" x2="340" y2="350" stroke="#0000ff" stroke-width="2"/>
+  <line x1="320" y1="390" x2="340" y2="360" stroke="#795e26" stroke-width="2"/>
 
   <!-- Heap value + control block (count=2) -->
-  <rect x="330" y="325" width="220" height="55" rx="6" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
+  <rect x="330" y="325" width="220" height="55" rx="6" fill="#f3f3f3" stroke="#267f99" stroke-width="2"/>
 
   <!-- Value cell -->
-  <rect x="345" y="335" width="80" height="35" rx="4" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1"/>
-  <text x="385" y="355" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">77</text>
-  <text x="385" y="366" text-anchor="middle" fill="#ce9178" font-size="9">same value</text>
+  <rect x="345" y="335" width="80" height="35" rx="4" fill="#ffffff" stroke="#267f99" stroke-width="1"/>
+  <text x="385" y="355" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">77</text>
+  <text x="385" y="366" text-anchor="middle" fill="#a31515" font-size="9">same value</text>
 
   <!-- Ref count cell (now 2) -->
-  <rect x="440" y="335" width="95" height="35" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="487" y="355" text-anchor="middle" fill="#dcdcaa" font-size="14" font-weight="bold">count: 2</text>
-  <text x="487" y="366" text-anchor="middle" fill="#ce9178" font-size="9">incremented!</text>
+  <rect x="440" y="335" width="95" height="35" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1.5"/>
+  <text x="487" y="355" text-anchor="middle" fill="#795e26" font-size="14" font-weight="bold">count: 2</text>
+  <text x="487" y="366" text-anchor="middle" fill="#a31515" font-size="9">incremented!</text>
 
   <!-- Status -->
-  <rect x="590" y="335" width="190" height="38" rx="15" fill="#dcdcaa22" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="685" y="359" text-anchor="middle" fill="#dcdcaa" font-size="12" font-weight="bold">2 owners → count = 2</text>
+  <rect x="590" y="335" width="190" height="38" rx="15" fill="#795e2622" stroke="#795e26" stroke-width="1.5"/>
+  <text x="685" y="359" text-anchor="middle" fill="#795e26" font-size="12" font-weight="bold">2 owners → count = 2</text>
 
   <!-- ============ STEP 3: One destroyed ============ -->
-  <text x="30" y="455" fill="#dc3545" font-size="15" font-weight="bold">Step 3: sharedB goes out of scope</text>
-  <text x="30" y="475" fill="#608b4e" font-size="12">} // sharedB destroyed — count goes DOWN, but memory survives!</text>
+  <text x="30" y="455" fill="#c0392b" font-size="15" font-weight="bold">Step 3: sharedB goes out of scope</text>
+  <text x="30" y="475" fill="#008000" font-size="12">} // sharedB destroyed — count goes DOWN, but memory survives!</text>
 
   <!-- sharedA still alive -->
-  <rect x="30" y="490" width="200" height="50" rx="6" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
-  <text x="40" y="510" fill="#569cd6" font-size="11" font-weight="bold">shared_ptr</text>
-  <text x="40" y="526" fill="#9cdcfe" font-size="13">sharedA</text>
+  <rect x="30" y="490" width="200" height="50" rx="6" fill="#f3f3f3" stroke="#0000ff" stroke-width="2"/>
+  <text x="40" y="510" fill="#0000ff" font-size="11" font-weight="bold">shared_ptr</text>
+  <text x="40" y="526" fill="#001080" font-size="13">sharedA</text>
 
   <!-- sharedB gone -->
-  <rect x="30" y="548" width="200" height="30" rx="6" fill="#3d2020" stroke="#dc354580" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="135" y="568" text-anchor="middle" fill="#dc3545" font-size="11" font-style="italic">sharedB destroyed ✕</text>
+  <rect x="30" y="548" width="200" height="30" rx="6" fill="#fce4ec" stroke="#c0392b80" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="135" y="568" text-anchor="middle" fill="#c0392b" font-size="11" font-style="italic">sharedB destroyed ✕</text>
 
   <!-- Arrow from A to heap -->
-  <line x1="230" y1="515" x2="330" y2="515" stroke="#569cd6" stroke-width="2" marker-end="url(#arrow-a)"/>
+  <line x1="230" y1="515" x2="330" y2="515" stroke="#0000ff" stroke-width="2" marker-end="url(#arrow-a)"/>
 
   <!-- Heap still alive (count=1) -->
-  <rect x="330" y="490" width="220" height="50" rx="6" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
+  <rect x="330" y="490" width="220" height="50" rx="6" fill="#f3f3f3" stroke="#267f99" stroke-width="2"/>
 
-  <rect x="345" y="498" width="80" height="35" rx="4" fill="#1e1e1e" stroke="#4ec9b0" stroke-width="1"/>
-  <text x="385" y="518" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">77</text>
-  <text x="385" y="529" text-anchor="middle" fill="#28a745" font-size="9">still alive!</text>
+  <rect x="345" y="498" width="80" height="35" rx="4" fill="#ffffff" stroke="#267f99" stroke-width="1"/>
+  <text x="385" y="518" text-anchor="middle" fill="#098658" font-size="14" font-weight="bold">77</text>
+  <text x="385" y="529" text-anchor="middle" fill="#1c7e45" font-size="9">still alive!</text>
 
-  <rect x="440" y="498" width="95" height="35" rx="4" fill="#1e1e1e" stroke="#dcdcaa" stroke-width="1"/>
-  <text x="487" y="518" text-anchor="middle" fill="#dcdcaa" font-size="14" font-weight="bold">count: 1</text>
-  <text x="487" y="529" text-anchor="middle" fill="#ce9178" font-size="9">decremented</text>
+  <rect x="440" y="498" width="95" height="35" rx="4" fill="#ffffff" stroke="#795e26" stroke-width="1"/>
+  <text x="487" y="518" text-anchor="middle" fill="#795e26" font-size="14" font-weight="bold">count: 1</text>
+  <text x="487" y="529" text-anchor="middle" fill="#a31515" font-size="9">decremented</text>
 
   <!-- Status -->
-  <rect x="590" y="498" width="190" height="38" rx="15" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
-  <text x="685" y="514" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">count &gt; 0 → memory</text>
-  <text x="685" y="529" text-anchor="middle" fill="#28a745" font-size="11" font-weight="bold">stays alive</text>
+  <rect x="590" y="498" width="190" height="38" rx="15" fill="#1c7e4522" stroke="#1c7e45" stroke-width="1.5"/>
+  <text x="685" y="514" text-anchor="middle" fill="#1c7e45" font-size="11" font-weight="bold">count &gt; 0 → memory</text>
+  <text x="685" y="529" text-anchor="middle" fill="#1c7e45" font-size="11" font-weight="bold">stays alive</text>
 
   <!-- Bottom summary -->
-  <rect x="50" y="585" width="720" height="35" rx="6" fill="#c586c015" stroke="#c586c0" stroke-width="1"/>
-  <text x="410" y="607" text-anchor="middle" fill="#d4d4d4" font-size="12">When <tspan fill="#9cdcfe">sharedA</tspan> is also destroyed → count reaches <tspan fill="#dc3545" font-weight="bold">0</tspan> → memory is <tspan fill="#dc3545" font-weight="bold">freed automatically</tspan></text>
+  <rect x="50" y="585" width="720" height="35" rx="6" fill="#af00db15" stroke="#af00db" stroke-width="1"/>
+  <text x="410" y="607" text-anchor="middle" fill="#2c3e50" font-size="12">When <tspan fill="#001080">sharedA</tspan> is also destroyed → count reaches <tspan fill="#c0392b" font-weight="bold">0</tspan> → memory is <tspan fill="#c0392b" font-weight="bold">freed automatically</tspan></text>
 </svg>
